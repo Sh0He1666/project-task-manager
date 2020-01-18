@@ -16,20 +16,21 @@ import javax.persistence.*;
  *
  */
 @Entity
+@Table(name="project")
 public class Project implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id; //プロジェクトID
-	
 	private String code; //プロジェクトコード
-	
 	private String name; //プロジェクト名
-	
 	private Timestamp registered_dt; //登録日
 	
-	//Setter Getter
+	@ManyToOne
+	@JoinColumn(name="id")
+	private Project project; //プロジェクト情報
 	
+	//Setter Getter
 	//ID
 	public Integer getId() {
 		return this.id;
@@ -54,11 +55,10 @@ public class Project implements Serializable {
 		this.name = name;
 	}
 	
-	//registered Date
-	public Timestamp getRegisteredDate() {
-		return this.registered_dt;
+	public Project getProject() {
+		return this.project;
 	}
-	public void setCode(Timestamp registered_dt) {
-		this.registered_dt = registered_dt;
+	public void setProject(Project project) {
+		this.project = project;
 	}
 }

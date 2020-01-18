@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title th:text="タスク一覧" >タスク一覧</title>
+	<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body class="task-list">
+  <div class="header">
+    <div class="header-logo"><img th:src=”@{/images/logo_kohaku.jpg}” >
+    </div>
+    <div class="header-list">
+      <ul>
+        <li><a href="/task/task-list" style="text-decoration:none; color:black;">タスク一覧</a></li>
+        <li><a href="/task/task-add-info" style="text-decoration:none; color:black;">タスク追加</a></li>
+        <li><a href="/task/project-charge-add-info" style="text-decoration:none; color:black;">プロジェクトコード・チャージコード追加</a></li>
+        <li><a href="/task/task-delete-info" style="text-decoration:none; color:black;">タスク削除</a></li>
+        <li><a href="/login/logout-form" style="text-decoration:none; color:black;">ログアウト</a></li>
+      </ul>
+    </div>
+    <div id="menu-background">
+    </div>
+  </div>
+</body>
+</html>
