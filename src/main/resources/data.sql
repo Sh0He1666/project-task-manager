@@ -1,7 +1,7 @@
 INSERT INTO account_user (name, passwd, latest_login_dt)
 VALUES ('F001', '集英社PJ関連', null)/;
-INSERT INTO charge_code (code, name, pj_id)
-VALUES ('F001', '集英社PJ関連', 1)/;
+INSERT INTO charge_code (code, name)
+VALUES ('F001', '集英社PJ関連')/;
 INSERT INTO project (code, name)
 VALUES ('SES', '集英社')/;
 INSERT INTO task_history (user_id, charge_code_id, code, name, detail, content, problem, plan, deadline_dt, status, progress_rt)

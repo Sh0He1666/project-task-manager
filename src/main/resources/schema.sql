@@ -26,7 +26,7 @@ CREATE TABLE account_user
 	id serial NOT NULL UNIQUE,
 	name varchar(20) NOT NULL UNIQUE,
 	passwd varchar(20) NOT NULL,
-	registerd_dt timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	registered_dt timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	latest_login_dt timestamp,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS /;
@@ -37,7 +37,6 @@ CREATE TABLE charge_code
 	id serial NOT NULL UNIQUE,
 	code varchar(20) NOT NULL UNIQUE,
 	name varchar(20) NOT NULL,
-	pj_id int NOT NULL,
 	registerd_dt timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS /;
