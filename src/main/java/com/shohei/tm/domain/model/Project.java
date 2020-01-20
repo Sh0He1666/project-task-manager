@@ -10,6 +10,8 @@ import java.sql.Timestamp;
 
 import javax.persistence.*;
 
+import com.sun.istack.NotNull;
+
 /**
  * プロジェクトエンティティを表すクラスです
  * @author shoheitokumaru
@@ -22,16 +24,14 @@ public class Project implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id; //プロジェクトID
+	@NotNull
+	@Column(length=20, nullable=false)
 	private String code; //プロジェクトコード
+	@NotNull
+	@Column(length=20, nullable=false)
 	private String name; //プロジェクト名
-	private Timestamp registered_dt; //登録日
-	
-	@ManyToOne
-	@JoinColumn(name="id")
-	private Project project; //プロジェクト情報
 	
 	//Setter Getter
-	//ID
 	public Integer getId() {
 		return this.id;
 	}
@@ -39,7 +39,6 @@ public class Project implements Serializable {
 		this.id = id;
 	}
 	
-	//code
 	public String getCode() {
 		return this.code;
 	}
@@ -47,18 +46,10 @@ public class Project implements Serializable {
 		this.code = code;
 	}
 
-	//name
 	public String getName() {
 		return this.name;
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	public Project getProject() {
-		return this.project;
-	}
-	public void setProject(Project project) {
-		this.project = project;
 	}
 }
