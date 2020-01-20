@@ -23,6 +23,6 @@ public class ProjectController {
 	
 	@RequestMapping("/")
 	String testProject() {
-		return "project/test_project";
+		return "task/task-list";
 	}
 }
