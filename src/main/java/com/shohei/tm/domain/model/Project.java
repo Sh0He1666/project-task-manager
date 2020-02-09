@@ -9,8 +9,8 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
-import com.sun.istack.NotNull;
 
 /**
  * プロジェクトエンティティを表すクラスです

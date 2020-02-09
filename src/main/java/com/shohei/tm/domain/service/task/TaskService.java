@@ -42,9 +42,15 @@ public class TaskService {
 		return taskHistoryRepository.findById(id).orElse(null);
 	}
 	
+	//idのcontent, problem, planを更新する
+	public Integer updateTaskDetailById(String content, String problem, String plan, Integer id) {
+		return taskHistoryRepository.updateTaskDetailById(content, problem, plan, id);
+	}
+	
 	//プロジェクト情報を追加するメソッド
 	
 	//チャージコードを追加するメソッド
+	//public ChargeCode save()
 	
 	//タスクを削除するメソッド
 

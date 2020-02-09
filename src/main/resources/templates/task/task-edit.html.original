@@ -12,7 +12,7 @@
     </div>
     <div class="header-list">
       <ul>
-        <li><a href="/task" style="text-decoration:none; color:white;">タスク一覧</a></li>
+        <li><a href="/task/task-list" style="text-decoration:none; color:white;">タスク一覧</a></li>
         <li><a href="/task/task-add-info" style="text-decoration:none; color:white;">タスク追加</a></li>
         <li><a href="/task/project-add-info" style="text-decoration:none; color:white;">プロジェクトコード追加</a></li>
         <li><a href="/task/charge-add-info" style="text-decoration:none; color:white;">チャージコード追加</a></li>
@@ -25,31 +25,30 @@
   </div>
 <p style="margin-bottom:3em;"></p>  
 <!-- 共通部分　ここまで -->
-<div th:with="data=${task_detail_data}">
+<div th:object="${task_detail_data}">
   <!-- タイトル -->
   <div>
-    <h1 th:text="|${data.code} : ${data.detail}|">タスクコード：タスク詳細</h1>
+    <h1 th:text="|*{code} : *{detail}|">タスクコード：タスク詳細</h1>
   </div>
   <!-- リスト -->
   <div>
     <p style="margin-bottom:1em;"></p>
   </div>
   <div>
-    <form th:object="${taskDetailForm}"
-          th:action="@{'/task/edit/' + ${data.id}}" method="post">
+    <form th:action="@{'/task/edit/' + *{id}}" method="post">
       <div>
         <p>内容：</p>
-        <textarea th:text="${data.content}" name="content"></textarea>
+        <textarea th:text="*{content}" name="content"></textarea>
         <p style="margin-bottom:1em;"></p>
       </div>
       <div>
         <p>課題：</p>
-        <textarea th:text="${data.problem}" name="problem"></textarea>
+        <textarea th:text="*{problem}" name="problem"></textarea>
         <p style="margin-bottom:1em;"></p>
       </div>
       <div>
         <p>予定：</p>
-        <textarea th:text="${data.plan}" name="plan"></textarea>
+        <textarea th:text="*{plan}" name="plan"></textarea>
         <p style="margin-bottom:1em;"></p>
       </div>
       <p>
