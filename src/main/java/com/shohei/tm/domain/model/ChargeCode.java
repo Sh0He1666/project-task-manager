@@ -1,35 +1,38 @@
 /**
- * 20200113 初版
+ * 20200117 初版
  * 
  */
-
 package com.shohei.tm.domain.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 
 /**
- * プロジェクトエンティティを表すクラスです
+ * チャージコードエンティティを表すクラスです
  * @author shoheitokumaru
  *
  */
 @Entity
-@Table(name="project")
-public class Project implements Serializable {
-	
+@Table(name="charge_code")
+public class ChargeCode implements Serializable {
+	//カラム情報を定義
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id; //プロジェクトID
+	private int id; //Charge Code  
 	@NotNull
 	@Column(length=20, nullable=false)
-	private String code; //プロジェクトコード
+	private String code; //Charge Code varchar(20) ex) F001, E, etc..
 	@NotNull
 	@Column(length=20, nullable=false)
-	private String name; //プロジェクト名
+	private String name; //Charge Code Name varchar(20) ex) 保守
 	
 	//Setter Getter
 	public Integer getId() {
@@ -42,7 +45,7 @@ public class Project implements Serializable {
 	public String getCode() {
 		return this.code;
 	}
-	public void setCode(String code) {
+	public void setId(String code) {
 		this.code = code;
 	}
 

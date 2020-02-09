@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title th:text="タスク一覧" >タスク一覧</title>
+	<link th:href="@{/css/style_task_list.css}" rel="stylesheet" type="text/css">
+</head>
+<body class="task-list">
+  <div class="header">
+    <div class="header-logo"><img th:src="@{/images/logo_kohaku.jpg}" >
+    </div>
+    <div class="header-list">
+      <ul>
+        <li><a href="/task" style="text-decoration:none; color:white;">タスク一覧</a></li>
+        <li><a href="/task/task-add-info" style="text-decoration:none; color:white;">タスク追加</a></li>
+        <li><a href="/task/project-add-info" style="text-decoration:none; color:white;">プロジェクトコード追加</a></li>
+        <li><a href="/task/charge-add-info" style="text-decoration:none; color:white;">チャージコード追加</a></li>
+        <li><a href="/task/task-delete-info" style="text-decoration:none; color:white;">タスク削除</a></li>
+        <li><a href="/login/logout-form" style="text-decoration:none; color:white;">ログアウト</a></li>
+      </ul>
+    </div>
+    <div id="menu-background">
+    </div>
+  </div>
+<p style="margin-bottom:5em;"></p>  
+
+<div th:each="project : ${project_lists}">
+<p style="margin-bottom:5em;"></p>
+<p th:text="${project.name}">プロジェクト名</p>
+  <table>
+    <tr>
+      <th>タスクID</th>
+      <th>チャージコード</th>
+      <th>タスク名</th>
+      <th>期日</th>
+      <th>進捗状況</th>
+      <th>進捗度(%)</th>
+      <th>進行中タスク</th>
+    </tr>
+    <tr th:each="task : ${task_lists}"
+        th:if="${project.id == task.projectId.id}">
+      <td th:text="${task.code}">SES_001</td>
+      <td th:text="${task.chargeCode.code}">F001</td>
+      <td>
+        <a th:href="@{'/task/' + ${task.id}}" th:text="${task.detail}">
+          ECbeing インフラリプレース
+        </a>
+      </td>
+      <td th:text="${task.deadlineDate}"></td>
+      <td th:text="${task.status}">進行中</td>
+      <td th:text="${task.progressRate}">60%</td>
+      <td><img th:src="@{/images/button-off.jpg}"></td>
+    </tr>
+  </table>
+<p style="margin-bottom:5em;"></p>
+</div>
+</body>
+</html>

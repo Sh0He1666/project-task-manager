@@ -26,8 +26,9 @@ CREATE TABLE account_user
 	id serial NOT NULL UNIQUE,
 	name varchar(20) NOT NULL UNIQUE,
 	passwd varchar(20) NOT NULL,
-	registerd_dt timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	latest_login_dt timestamp,
+	registered_dt timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	last_login_dt timestamp,
+	role_name varchar(29) NOT NULL,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS /;
 
@@ -37,7 +38,6 @@ CREATE TABLE charge_code
 	id serial NOT NULL UNIQUE,
 	code varchar(20) NOT NULL UNIQUE,
 	name varchar(20) NOT NULL,
-	pj_id int NOT NULL,
 	registerd_dt timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS /;
@@ -45,7 +45,9 @@ CREATE TABLE charge_code
 
 CREATE TABLE task_history
 (
+	id serial NOT NULL UNIQUE,
 	user_id int NOT NULL,
+	project_id int NOT NULL,
 	charge_code_id int NOT NULL,
 	-- Pj_code + task number
 	code varchar(20) NOT NULL,
@@ -54,11 +56,13 @@ CREATE TABLE task_history
 	content varchar(1000),
 	problem varchar(1000),
 	plan varchar(1000),
-	deadline_dt timestamp,
+	-- timestamp -> date に変更
+	deadline_dt date,
 	-- 0:未着手, 1:進行中 ,2:処理済み
 	status varchar(10) NOT NULL,
 	progress_rt int NOT NULL CONSTRAINT number_check   CHECK(progress_rt >= 0 and progress_rt <= 10),
-	registered_dt timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
+	registered_dt timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	PRIMARY KEY (id)
 ) WITHOUT OIDS /;
 
 
