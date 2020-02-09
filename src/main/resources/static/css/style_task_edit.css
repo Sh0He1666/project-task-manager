@@ -1,0 +1,102 @@
+/* memo 
+margin: up right down left 
+*/
+
+
+/* html */
+html {
+  background-color: #f0f0f0;
+  font-size: 20px;
+  font-family: 'Open Sans', sans-serif; 
+}
+
+/* body */
+*{
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
+body,form,input{margin: 0}
+
+/* ヘッダーメニュー　ここから */
+.header{
+  background-color:#000;
+  height: 100px;
+  box-shadow: 0 0 8px;
+}
+
+.header-logo{
+  float: left;
+  padding: 10px 20px 10px 20px;
+}
+
+.header-logo img{
+  width: 140px;
+  height: 80px;
+}
+
+.header-list ul li{
+  list-style: none;
+  float:left;
+  font-size: 20px;
+  color: #fff;
+  font-weight: bold;
+  padding: 30px 13px;
+}
+/* ヘッダーメニュー　ここまで */
+
+
+
+form div textarea{
+	margin: 10px 0px 10px 30px;
+	width: 600px;
+	height: 10em;
+}
+
+form p input {
+	float: ;
+	margin: 10px 0px 10px 10px;
+	font-size: 15px;
+	width: 600px;
+	height: 20em;
+}
+
+form p input:first-child {
+	float: ;
+	font-size: 15px;
+	margin: 10px 0px 10px 500px;
+	width: 70px;
+	height: 20em;
+}
+
+form p input:last-child {
+	float: ;
+	font-size: 15px;
+	margin: 10px 0px 10px 10px;
+	width: 70px;
+	height: 20em;
+}
+
+/* ボタン */
+.button {
+	width: 70px;
+	height: 10em;
+}
+
+li{
+	font-size: 25px;
+	color: #000;
+	font-weight: bold;	
+}
+
+h1{
+	font-size: 30px;
+	color: #000;
+	font-weight: bold;
+}
+
+p{
+  font-size: 20px;
+  color: #000;
+  font-weight: bold;
+}
