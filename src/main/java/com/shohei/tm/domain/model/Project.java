@@ -46,6 +46,10 @@ public class Project implements Serializable {
 		this.code = code;
 	}
 
+	public String getCodeById(Integer id) {
+		return this.code;
+	}
+
 	public String getName() {
 		return this.name;
 	}

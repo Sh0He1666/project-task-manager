@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS task_history CASCADE /;
 DROP TABLE IF EXISTS account_user CASCADE /;
 DROP TABLE IF EXISTS charge_code CASCADE /;
 DROP TABLE IF EXISTS project CASCADE /;
+DROP TABLE IF EXISTS code CASCADE /;
 
 
 
@@ -51,7 +52,6 @@ CREATE TABLE task_history
 	charge_code_id int NOT NULL,
 	-- Pj_code + task number
 	code varchar(20) NOT NULL,
-	name varchar(100) NOT NULL,
 	detail varchar(100) NOT NULL,
 	content varchar(1000),
 	problem varchar(1000),
@@ -65,6 +65,14 @@ CREATE TABLE task_history
 	PRIMARY KEY (id)
 ) WITHOUT OIDS /;
 
+CREATE TABLE code
+(
+	id serial NOT NULL UNIQUE,
+	genre varchar(20) NOT NULL, -- status, percent ..
+	code varchar(20) NOT NULL, 
+	name varchar(20) NOT NULL, -- 未着手,進行中 ..
+	PRIMARY KEY (id)
+)/;
 
 /* Comments */
 

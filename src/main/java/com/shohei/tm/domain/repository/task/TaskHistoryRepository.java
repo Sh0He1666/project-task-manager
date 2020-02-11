@@ -45,4 +45,6 @@ public interface TaskHistoryRepository extends JpaRepository<TaskHistory, Intege
 			@Param("plan") String plan,
 			@Param("id") Integer id
 			);
+	
+	//タスク情報を追加する
 }

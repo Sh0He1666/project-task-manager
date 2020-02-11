@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title th:text="タスク一覧" >タスク追加画面</title>
+	<link th:href="@{/css/style_headlist.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/style_task_add_info.css}" rel="stylesheet" type="text/css">
+</head>
+<body class="task-list">
+  <div class="header"  th:include="/common.html::headlist"></div>
+<p style="margin-bottom:3em;"></p>  
+
+<div>
+  <!-- タイトル -->
+  <div>
+    <h1>◼️追加したいタスクを入力してください。</h1>
+  </div>
+  <!-- リスト -->
+  <div>
+    <p style="margin-bottom:1em;"></p>
+  </div>
+  <!-- フォーム入力箇所 -->
+  <div>
+    <form th:object="${taskForm}"
+          th:action="@{'/task'}" method="post">
+      <ul>
+        <li class="task-code">タスクコード：
+          <select th:field="*{projectId}">
+            <option th:each="project : ${currentProjectList}"
+                    th:value="${project.id}">[[${project.code}]]
+            </option>
+          </select> ＿
+          <input type="text" th:field="*{projectCodeId}" ><a> 例) SES_100, JSC_555</a>
+        </li>
+        <li class="charge-code">チャージコード：
+          <select th:field="*{chargeId}">
+            <option th:each="charge : ${currentChargeList}"
+                    th:value="${charge.id}">[[${charge.code}]]
+            </option>
+          </select>
+        </li>
+        <li class="task-name">タスク名：
+          <input type="text" th:field="*{detail}" ><a> 例) ドメイン変更対応</a>        
+        </li>
+        <li class="deadline">期日：
+          <select th:field="*{year}">
+            <option th:each="code : ${codeList}"
+                    th:if="${code.genre == 'year'}"
+                    th:value="${code.code}">[[${code.name}]]
+            </option>              
+          </select><a class="date">年 </a>
+          <select th:field="*{month}">
+            <option th:each="code : ${codeList}"
+                    th:if="${code.genre == 'month'}"
+                    th:value="${code.code}">[[${code.name}]]
+            </option>              
+          </select><a class="date">月 </a>
+          <select th:field="*{day}">
+            <option th:each="code : ${codeList}"
+                    th:if="${code.genre == 'day'}"
+                    th:value="${code.code}">[[${code.name}]]
+            </option>              
+          </select><a class="date">日 </a>
+        </li>
+        <p style="margin-bottom:1em;"></p>
+        <li class="status">ステータス：
+          <select th:field="*{status}">
+            <option th:each="code : ${codeList}"
+                    th:if="${code.genre == 'status'}"
+                    th:value="${code.code}">[[${code.name}]]
+            </option>
+          </select>
+        </li>
+        <p style="margin-bottom:1em;"></p>
+        <li class="progress">進捗(%)：
+          <select th:field="*{progressRate}">
+            <option th:each="code : ${codeList}"
+                    th:if="${code.genre == 'progress_rt'}"
+                    th:value="${code.code}">[[${code.name}]]
+            </option>
+          </select>
+        </li>
+        <p style="margin-bottom:1em;"></p>
+      </ul>
+        <p style="margin-bottom:1em;"></p>
+      <p>
+        <input type="submit" value="追加">
+        <input type="reset" value="リセット">
+      </p>      
+    </form>
+  </div>
+  <!-- すでに登録済みのプロジェクト情報を表示させる -->
+  <div>
+    <p style="margin-bottom:1em;"></p>
+  </div>
+  <div>
+    <h1>◼️すでに登録済みのタスク一覧</h1>
+      <p style="margin-bottom:1em;"></p>    
+    <div>
+      <ul>
+        <li th:each="task : ${currentTaskList}"
+            th:text="|${task.code}, チャージコード：${task.chargeCode.code}, 詳細：${task.detail}|">
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<p style="margin-bottom:5em;"></p>
+</body>
+</html>
