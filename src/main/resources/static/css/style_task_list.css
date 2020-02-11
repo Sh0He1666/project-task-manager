@@ -1,44 +1,4 @@
 
-/* html */
-html {
-  background-color: #f0f0f0;
-  font-size: 20px;
-  font-family: 'Open Sans', sans-serif; 
-}
-
-/* body */
-*{
-  margin: 0 auto;
-  padding: 0 auto;
-}
-
-body,form,input{margin: 0}
-
-.header{
-  background-color:#000;
-  height: 100px;
-  box-shadow: 0 0 8px;
-}
-
-.header-logo{
-  float: left;
-  padding: 10px 20px 10px 20px;
-}
-
-.header-logo img{
-  width: 140px;
-  height: 80px;
-}
-
-.header-list ul li{
-  list-style: none;
-  float:left;
-  font-size: 20px;
-  color: #fff;
-  font-weight: bold;
-  padding: 30px 13px;
-}
-
 /* Table */
 
 table{
@@ -88,6 +48,12 @@ table tr:last-child td:first-child {
 
 table tr:last-child td:last-child {
   border-radius: 0 0 5px 0;
+}
+
+.project-name {
+  font-size: 20px;
+  color: #000;
+  font-weight: bold;	
 }
 
 p{

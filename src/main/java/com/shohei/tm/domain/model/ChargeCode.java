@@ -45,7 +45,7 @@ public class ChargeCode implements Serializable {
 	public String getCode() {
 		return this.code;
 	}
-	public void setId(String code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 

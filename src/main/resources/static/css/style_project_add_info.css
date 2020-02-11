@@ -1,0 +1,56 @@
+
+form p input {
+	float: ;
+	font-size: 20px;
+	margin: 10px 0px 10px 500px;
+	width: 70px;
+	height: 30em;
+}
+
+form p input:first-child {
+	float: ;
+	font-size: 30px;
+	margin: 10px 0px 10px 500px;
+	width: 70px;
+	height: 40em;
+}
+
+form p input:last-child {
+	float: ;
+	font-size: 20px;
+	margin: 10px 0px 10px 10px;
+	width: 70px;
+	height: 30em;
+}
+
+form ul li input {
+	font-size: 20px;
+	margin: 10px 0px 10px 0px;
+	width: 20%;
+	height: 2em;
+}
+
+form ul li a {
+    font-size: 20px;
+    color: blue;
+    font-weight: normal;
+}
+
+div form ul li{
+	font-size: 25px;
+	color: #000;
+	font-weight: bold;	
+}
+
+div ul li {
+	font-size: 23px;
+	margin: 10px 0px 10px 10px;
+	color: #000;
+	font-weight: normal;	
+}
+
+h1{
+	font-size: 25px;
+	color: #000;
+	font-weight: bold;
+}
