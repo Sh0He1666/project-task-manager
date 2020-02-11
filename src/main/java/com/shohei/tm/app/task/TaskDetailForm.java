@@ -21,7 +21,7 @@ import com.shohei.tm.domain.service.project.ProjectService;
 import com.shohei.tm.domain.service.task.TaskService;
 
 /**
- * タスクに関するリクエストを受けるコントローラークラス
+ * タスク詳細に関するリクエストを受けるコントローラークラス
  * @author shoheitokumaru
  *
  */

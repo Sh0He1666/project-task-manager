@@ -65,6 +65,7 @@ public class TaskDetailController {
 		return "redirect:/task/{id}";
 	}
 	
+	//リクエストパラメータをバインドする
 	@ModelAttribute
 	TaskDetailForm setUpTaskDetailForm() {
 		TaskDetailForm form = new TaskDetailForm();

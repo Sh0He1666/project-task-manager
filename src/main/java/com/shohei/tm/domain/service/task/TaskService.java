@@ -48,10 +48,8 @@ public class TaskService {
 	}
 	
 	//プロジェクト情報を追加するメソッド
-	
-	//チャージコードを追加するメソッド
-	//public ChargeCode save()
-	
-	//タスクを削除するメソッド
+	public void save(TaskHistory taskHistory) {
+		taskHistoryRepository.save(taskHistory);
+	}
 
 }
