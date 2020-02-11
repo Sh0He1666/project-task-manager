@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title th:text="タスク一覧" >プロジェクト情報追加画面</title>
+	<link th:href="@{/css/style_headlist.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/style_project_add_info.css}" rel="stylesheet" type="text/css">
+</head>
+<body class="task-list">
+  <div class="header"  th:include="/common.html::headlist"></div>
+<p style="margin-bottom:3em;"></p>  
+
+<div th:with="data=${task_detail_data}">
+  <!-- タイトル -->
+  <div>
+    <h1>◼️追加したいプロジェクトの情報を入力してください。</h1>
+  </div>
+  <!-- リスト -->
+  <div>
+    <p style="margin-bottom:1em;"></p>
+  </div>
+  <!-- フォーム入力箇所 -->
+  <div>
+    <form th:object="${projectForm}"
+          th:action="@{'/project'}" method="post">
+      <ul>
+        <li>プロジェクトコード：<input type="text" th:field="*{code}"><a> 例) SES, JSC</a></li>
+        <p style="margin-bottom:1em;"></p>
+        <li>プロジェクト名：<input type="text" th:field="*{name}"><a> 例) 集英社, V8標準課題</a></li>        
+      </ul>
+        <p style="margin-bottom:1em;"></p>
+      <p>
+        <input type="submit" value="追加">
+        <input type="reset" value="リセット">
+      </p>      
+    </form>
+  </div>
+  <!-- すでに登録済みのプロジェクト情報を表示させる -->
+  <div>
+    <p style="margin-bottom:1em;"></p>
+  </div>
+  <div>
+    <h1>◼️すでに登録済みのプロジェクト(メモ：ここに削除機能もつける)</h1>
+      <p style="margin-bottom:1em;"></p>    
+    <div>
+      <ul>
+        <li th:each="project : ${currentProjectList}"
+            th:text="|${project.code}, ${project.name}|">
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>
