@@ -67,7 +67,7 @@
           <select th:field="*{status}">
             <option th:each="code : ${codeList}"
                     th:if="${code.genre == 'status'}"
-                    th:value="${code.code}">[[${code.name}]]
+                    th:value="${code.name}">[[${code.name}]]
             </option>
           </select>
         </li>
@@ -76,7 +76,7 @@
           <select th:field="*{progressRate}">
             <option th:each="code : ${codeList}"
                     th:if="${code.genre == 'progress_rt'}"
-                    th:value="${code.code}">[[${code.name}]]
+                    th:value="${code.name}">[[${code.name}]]
             </option>
           </select>
         </li>
@@ -99,7 +99,7 @@
     <div>
       <ul>
         <li th:each="task : ${currentTaskList}"
-            th:text="|${task.code}, チャージコード：${task.chargeCode.code}, 詳細：${task.detail}|">
+            th:text="|${task.code}, ${task.chargeCode.code}, ${task.detail}|">
         </li>
       </ul>
     </div>

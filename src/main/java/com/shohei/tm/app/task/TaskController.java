@@ -31,6 +31,8 @@ import com.shohei.tm.domain.service.task.TaskService;
 
 /**
  * タスクに関するリクエストを受けるコントローラークラス
+ * バインディングのため、フォームをセットアップするメソッドとリクエストをさばくメソッドは同じクラスに含まれるように
+ * してください
  * @author shoheitokumaru
  *
  */
@@ -46,6 +48,10 @@ public class TaskController {
 	@Autowired
 	CodeService codeService;
 	
+	//変数を指定
+	//結果を格納する
+	String result;
+
 	//タスク一覧とチャージコードリストを返すビジネスロジック
 	@RequestMapping(method=RequestMethod.GET)
 	String listTasks(Model model) {
@@ -62,7 +68,7 @@ public class TaskController {
 		model.addAttribute("codeList", codeList);
 		return "task/task-list";
 	}
-	
+
 	/**
 	 * タスク一覧画面→タスク詳細クリック→タスク詳細を編集する画面へ遷移
 	 * 渡す値：task_historyのカラム
@@ -74,9 +80,50 @@ public class TaskController {
 	String goToTaskEdit(@PathVariable("id") Integer id, Model model) {
 		//パスに入力されたidのデータを取得
 		TaskHistory taskDetailData = taskService.findOne(id);
+		//List<Code> statusList = codeService.getStatusList();
+		//List<Code> progressRateList = codeService.getProgressRateList();
+		List<Code> codeList = codeService.findAll();
 		//取得した値をModelに格納
 		model.addAttribute("task_detail_data", taskDetailData);
+		model.addAttribute("codeList", codeList);
+		//model.addAttribute("statusList", statusList);
+		//model.addAttribute("progressRateList", progressRateList);
 		return "task/task-edit";
+	}
+
+	/**
+	 * タスク詳細編集画面→データ更新→タスク詳細編集画面
+	 * 渡す値：task_history.id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(path="edit/{id}", method=RequestMethod.POST)
+	String updateTaskDetail(
+			//フォームで入力された情報を保持
+			@Validated TaskDetailForm form, 
+			//フォームクラスの入力チェック結果を保持
+			BindingResult bindingResult,
+			//@PathVariable リクエストパラメータ"roomId"に入っている値を取得する
+			@PathVariable("id") Integer id, 
+			Model model			
+			) {
+		
+		if (bindingResult.hasErrors()) {
+			return "redirect:/task/{id}";
+		}
+		
+		//フォームの入力値を取得
+		String status = form.getStatus();
+		String progressRate = form.getProgressRate();
+		String content = form.getContent();
+		String problem = form.getProblem();
+		String plan = form.getPlan();
+				
+		//データを更新
+		taskService.updateTaskDetailById(status, progressRate, content, problem, plan, id);
+		//return "redirect:/task/{id}";
+		result = this.goToTaskEdit(id, model);
+		return result;
 	}
 
 	@RequestMapping(path="task-add-info", method=RequestMethod.GET)
@@ -141,7 +188,7 @@ public class TaskController {
 		taskHistory.setDetail(detail);
 		taskHistory.setDeadlineDate(deadlineDate);
 		taskHistory.setStatus(status);	
-		taskHistory.setProgressRate(Integer.parseInt(progressRate));
+		taskHistory.setProgressRate(progressRate);
 		
 		//TaskHistoryに値を追加
 		taskService.save(taskHistory);
@@ -155,7 +202,14 @@ public class TaskController {
 		TaskForm form = new TaskForm();
 		return form;
 	}
-	
+
+	//リクエストパラメータをバインドする
+	@ModelAttribute
+	TaskDetailForm setUpTaskDetailForm() {
+		TaskDetailForm form = new TaskDetailForm();
+		return form;
+	}
+
 	//DeadlineDateを生成するメソッド
 	private LocalDate createDeadlineDate(String year, String month, String day) {
 		LocalDateConverter conv = new LocalDateConverter();

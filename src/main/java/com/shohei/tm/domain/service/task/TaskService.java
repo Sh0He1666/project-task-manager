@@ -43,8 +43,8 @@ public class TaskService {
 	}
 	
 	//idのcontent, problem, planを更新する
-	public Integer updateTaskDetailById(String content, String problem, String plan, Integer id) {
-		return taskHistoryRepository.updateTaskDetailById(content, problem, plan, id);
+	public Integer updateTaskDetailById(String status, String progressRate, String content, String problem, String plan, Integer id) {
+		return taskHistoryRepository.updateTaskDetailById(status, progressRate, content, problem, plan, id);
 	}
 	
 	//プロジェクト情報を追加するメソッド

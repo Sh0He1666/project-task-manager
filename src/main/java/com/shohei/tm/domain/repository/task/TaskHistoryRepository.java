@@ -32,14 +32,35 @@ public interface TaskHistoryRepository extends JpaRepository<TaskHistory, Intege
 	List<TaskHistory> queryAll();
 	//List<TaskHistory> findByUser_id(User user);
 	
+	/**
+	@Query(value = "select x.id,"
+			+ " x.chargeCode,"
+			+ " x.code,"
+			+ " x.content,"
+			+ " x.deadlineDate,"
+			+ " x.detail,"
+			+ " x.plan,"
+			+ " x.problem,"
+			+ " (select max(c.name) from Code c where c.genre = 'status' and c.code = x.status) as status,"
+			+ " (select max(c.name) from Code c where c.genre = 'progress_rt' and c.code = x.progressRate) as progress_rt"
+			+ " from TaskHistory x"
+			+ " order by x.id, x.projectId asc")
+	List<TaskHistory> queryAll();
+	//List<TaskHistory> findByUser_id(User user);
+	**/
+	
 	//タスク詳細情報をUPDATEする
 	@Modifying
 	@Query("update TaskHistory th set"
+			+ " th.status =:status,"
+			+ " th.progressRate =:progressRate,"
 			+ " th.content =:content,"
 			+ " th.problem =:problem,"
 			+ " th.plan =:plan"
 			+ " where th.id =:id") 
 	public Integer updateTaskDetailById (
+			@Param("status") String status,
+			@Param("progressRate") String progressRate,
 			@Param("content") String content,
 			@Param("problem") String problem,
 			@Param("plan") String plan,
