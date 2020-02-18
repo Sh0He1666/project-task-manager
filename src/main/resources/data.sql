@@ -1,31 +1,31 @@
 -- account_user
 INSERT INTO account_user (name, passwd, last_login_dt, role_name)
-VALUES ('shohei', '2469tkmr', null, 'ADMIN')/;
+VALUES ('shohei', 'test', null, 'ADMIN')/;
 -- charge_code
 INSERT INTO charge_code (code, name)
-VALUES ('F001', '集英社PJ関連')/;
+VALUES ('F001', 'ほげほげ')/;
 INSERT INTO charge_code (code, name)
-VALUES ('E', '保守')/;
+VALUES ('E', '保守系')/;
 INSERT INTO charge_code (code, name)
 VALUES ('PL', 'コンサル')/;
 INSERT INTO charge_code (code, name)
 VALUES ('RB', 'バグ修正')/;
 -- project
 INSERT INTO project (code, name)
-VALUES ('SES', '集英社')/;
+VALUES ('SSS', 'セブンエス')/;
 INSERT INTO project (code, name)
-VALUES ('JSC', 'ジュピター')/;
+VALUES ('JJJ', 'スリージェ')/;
 INSERT INTO project (code, name)
-VALUES ('AIM', 'V8標準課題')/;
+VALUES ('AIM', 'エーイム')/;
 -- task_history
 INSERT INTO task_history (user_id, project_id, charge_code_id, code, detail, content, problem, plan, deadline_dt, status, progress_rt)
-VALUES (1, 1, 1, 'SES_001', 'フローチャート改修', '内容記載枠', '課題記載枠', '今後の予定記載枠', null, '0', 0)/;
+VALUES (1, 1, 1, 'SSS_001', 'フローチャート改修', '内容記載枠', '課題記載枠', '今後の予定記載枠', null, '未着手', '0%')/;
 INSERT INTO task_history (user_id, project_id, charge_code_id, code, detail, content, problem, plan, deadline_dt, status, progress_rt)
-VALUES (1, 1, 2, 'SES_111', 'ドメイン変更対応', '内容記載枠', '課題記載枠', '今後の予定記載枠', null, '0', 0)/;
+VALUES (1, 1, 2, 'SSS_111', 'ドメイン変更対応', '内容記載枠', '課題記載枠', '今後の予定記載枠', null, '未着手', '0%')/;
 INSERT INTO task_history (user_id, project_id, charge_code_id, code, detail, content, problem, plan, deadline_dt, status, progress_rt)
-VALUES (1, 2, 3, 'JCS_001', '商品リスト修正', '内容記載枠', '課題記載枠', '今後の予定記載枠', null, '0', 0)/;
+VALUES (1, 2, 3, 'JJJ_001', '商品リスト修正', '内容記載枠', '課題記載枠', '今後の予定記載枠', null, '未着手', '0%')/;
 INSERT INTO task_history (user_id, project_id, charge_code_id, code, detail, content, problem, plan, deadline_dt, status, progress_rt)
-VALUES (1, 3, 4, 'AIM_001', '標準バグ修正', '内容記載枠', '課題記載枠', '今後の予定記載枠', null, '0', 0)/;
+VALUES (1, 3, 4, 'AIM_001', '標準バグ修正', '内容記載枠', '課題記載枠', '今後の予定記載枠', null, '未着手', '0%')/;
 -- code
 INSERT INTO code (genre, code, name)
 VALUES ('status','0', '未着手')/;

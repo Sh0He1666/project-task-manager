@@ -53,11 +53,11 @@ public class TaskHistory implements Serializable {
 	@Column(name="deadline_dt", columnDefinition = "DATE" ,nullable=true)
 	private LocalDate deadlineDate; //期日 
 	
-	@Column(length=2, nullable=false)
+	@Column(nullable=false)
 	private String status; // 進捗状況　0:未着手, 1:進行中 ,2:処理済み 
 	
 	@Column(name="progress_rt")
-	private Integer progressRate; //進捗度 0 =< progressRate =< 10 
+	private String progressRate; //進捗度 0 =< progressRate =< 10 
 
 	@ManyToOne
 	@NotNull
@@ -131,10 +131,10 @@ public class TaskHistory implements Serializable {
 		return this.status;
 		}		
 
-	public void setProgressRate(Integer progressRate) {
+	public void setProgressRate(String progressRate) {
 		this.progressRate = progressRate;
 		}
-	public Integer getProgressRate() {
+	public String getProgressRate() {
 		return this.progressRate;
 		}
 	

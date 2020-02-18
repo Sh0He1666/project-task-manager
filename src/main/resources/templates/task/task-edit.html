@@ -22,6 +22,30 @@
   <div>
     <form th:object="${taskDetailForm}"
           th:action="@{'/task/edit/' + ${data.id}}" method="post">
+      <div>    
+        <a th:each="code : ${codeList}"
+           th:if="${code.genre == 'status' && data.status == code.name}"
+           th:text="|ステータス：「 ${data.status} 」 から |">ステータス：</a>
+        <select th:field="*{status}">
+          <option th:each="code : ${codeList}"
+                  th:if="${code.genre == 'status'}"
+                  th:value="${code.name}">[[${code.name}]]
+          </option>
+        </select><a> へと変更</a>
+        <p style="margin-bottom:1em;"></p>
+      </div>
+      <div>
+        <a th:each="code : ${codeList}"
+           th:if="${code.genre == 'progress_rt' && data.progressRate == code.name}"
+           th:text="|進捗率(%)：「 ${data.progressRate} 」 から |">進捗率(%)：</a>
+        <select th:field="*{progressRate}">
+          <option th:each="code : ${codeList}"
+                  th:if="${code.genre == 'progress_rt'}"
+                  th:value="${code.name}">[[${code.name}]]
+          </option>
+        </select><a> へと変更</a>
+        <p style="margin-bottom:1em;"></p>
+      </div>
       <div>
         <p>内容：</p>
         <textarea th:text="${data.content}" name="content"></textarea>
