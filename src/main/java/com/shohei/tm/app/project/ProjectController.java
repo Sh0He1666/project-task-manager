@@ -59,7 +59,7 @@ public class ProjectController {
 		if (bindingResult.hasErrors()) {
 			return "redirect:/project";
 		}
-		
+
 		//プロジェクトインスタンスを生成
 		Project project = new Project();
 		

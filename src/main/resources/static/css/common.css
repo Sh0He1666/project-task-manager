@@ -1,0 +1,213 @@
+/* Common Def */
+
+*, code {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Hiragino Kaku Gothic ProN", "メイリオ", meiryo, sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+html {
+    color: #494848;
+}
+
+body {
+    background-color: rgba(196, 195, 174, 0.205);
+}
+
+/* header  */
+.top-image-area {
+    width: 100%;
+    height: 250px;
+    background-image: url(https://source.unsplash.com/random/);
+    background-position: 50% 20%;
+    background-size: cover;
+    margin: 0 0 2rem 0;
+}
+
+.top-image-area p {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.863);
+    font-weight: bold;
+    margin: 0;
+    padding: 5px 0 0 5px;
+    background-color: rgba(255, 255, 255, 0.589);
+}
+
+/* main */
+
+/*  */
+@media (min-width: 47.9385em) {
+.titlebar-container {
+    min-height: 106px;
+    padding: 12px 24px;
+}
+}
+
+.titlebar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    padding: 8px 16px;
+    border-bottom: solid 1px #dce3e5;
+    border-top: solid 1px #dce3e5;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 60px;
+}
+
+.titlebar-container .titlebar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    max-width: 1352px;
+}
+
+@media (min-width: 47.9385em) {
+.titlebar-container .title {
+    font-size: 51px;
+}
+}
+
+.titlebar-container .title {
+    flex: 1 1;
+    font-size: 26px;
+    font-weight: 700;
+    hyphens: auto;
+    font-family: x-locale-heading-primary,zillaslab,Palatino,"Palatino Linotype",x-locale-heading-secondary,serif;
+    line-height: 1;
+}
+
+/* main-area */
+
+.main-area {
+    margin: 0 8rem 2rem 1.5rem;
+    width: 70%;
+    height: auto;
+    float: right;
+    margin-top: 0;
+}
+
+.main-area article {
+    margin: 0 0 3rem 0;
+    padding: 0 0 3rem 1rem;
+    background-color: rgba(212, 209, 209, 0.349);
+    z-index: 10;
+    border : dashed 3px #6b6969;
+    border-radius: 20px;
+}
+
+.main-area article h1{
+    margin: 0;
+    padding: 3px 0 3px 0;   
+    width: 99%; 
+    text-align: left;
+    font-size: 1.5rem;
+    border-bottom: solid 1.5px #494848;
+}
+
+.main-area article p {
+    margin: 0;
+    padding: 1rem 0 1rem 0;    
+    text-align: left;
+    font-size: 1.5rem;
+}
+
+.main-area article h1::before{
+}
+
+/* left navi */
+
+.left-navi {
+    margin: 2em 0 0 0.5rem;
+    padding: 0;
+    width: 15%;
+}
+
+.left-navi label {
+    display: block;
+    margin: 1.5px 0;
+    padding: 13px 12px;
+    border : dashed 2px #6b6969;
+    border-radius: 6px;
+    color: #6b6969;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+/*アイコンを表示*/
+.left-navi label:before {
+    content: '▷';
+    padding-right: 8px;
+}
+
+/*ラベルホバー時*/
+.left-navi label:hover {
+    background :#ffe9a9;
+}
+
+/*チェックは隠す*/
+.left-navi input {
+    display: none;
+}
+
+/*中身を非表示にしておく*/
+.left-navi .hidden-list {
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: 0.8s;
+}
+
+/*クリックで中身表示*/
+.hidden-input:checked + label + .hidden-list {
+    height: auto;
+    margin: 0;
+    padding: 0;
+    opacity: 1;
+}
+
+.left-navi .hidden-list p {
+    margin: 15px 10px;
+    padding: 3px 3px 3px 3px;
+    width: 80%;
+    border-bottom: solid 1px #6b696991;
+}
+
+/*ラベルホバー時*/
+.left-navi .hidden-list p:hover {
+    background :#ffe9a9;
+}
+
+.left-navi .hidden-list a[href] {
+    color: #6b6969;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-decoration: none;
+}
+
+/*アイコンを入れ替える*/
+.hidden-input:checked + label:before {
+    content: '▽';
+}
+
+/* footer area */
+  
+.footer{
+    height: 50px;
+    color: #fff;
+    clear: both;
+    border-top: solid 1.5px #6b696991;
+}
+
+.footer small {
+    margin: 0 0 0 1rem;
+    color: #494848;
+    font-weight: normal;
+    text-align: right;
+}

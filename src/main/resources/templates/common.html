@@ -1,25 +1,83 @@
- <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-	<meta charset="UTF-8"/>
-	<title th:text="共通ブロック" >共通ブロック</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TS OPTIMIZER</title>
+    <link th:href="@{/css/normalize.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/style_task_list.css}" rel="stylesheet" type="text/css">
 </head>
-<body class="task-list">
-  <div class="header" th:fragment="headlist">
-    <div class="header-logo"><img th:src="@{/images/logo_kohaku.jpg}" >
+
+<body>
+    <header class="top-image-area" th:fragment="body-header">
+        <!-- header img -->
+        <p>THE TS OPTIMIZER</p>
+    </header>
+    <main>
+        <div class="titlebar-container">
+            <div class="titlebar">
+                <h1 class="title">機能名</h1>
+            </div>
+        </div>
+        <div>
+            <!-- main field -->
+            <div class="main-area">
+                <!-- 機能説明 -->
+                <article>
+                    <h1>Description</h1>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo, aut perferendis delectus explicabo
+                        nisi perspiciatis
+                        temporibus. Assumenda at alias ut illo modi, velit, iure magnam, earum eveniet placeat rem
+                        veritatis.</p>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo, aut perferendis delectus explicabo
+                        nisi perspiciatis
+                        temporibus. Assumenda at alias ut illo modi, velit, iure magnam, earum eveniet placeat rem
+                        veritatis.</p>
+                </article>
+
+                <!-- ここから機能部分 基本的にはここだけ修正する。その他は共通 -->
+                <div>
+       
+                </div>
+            </div>
+            <!-- left side menu -->
+            <div class="left-navi" th:fragment="left-navi">
+                <!-- タスク -->
+                <input type="checkbox" class="hidden-input" id="label1">
+                <label for="label1">タスク関連</label>
+                <div class="hidden-list">
+                    <p><a href="/task">タスク一覧</a></p>
+                    <p><a href="/task/task-add-info">タスク追加・削除</a></p>
+                </div>
+                <!-- プロジェクト -->
+                <input type="checkbox" class="hidden-input" id="label2">
+                <label for="label2">プロジェクト関連</label>
+                <div class="hidden-list">
+                    <p><a href="/project">プロジェクト情報追加・削除</a></p>
+                </div>
+                <!-- チャージ -->
+                <input type="checkbox" class="hidden-input" id="label3">
+                <label for="label3">チャージ関連</label>
+                <div class="hidden-list">
+                    <p><a href="/charge">チャージ情報追加・削除</a></p>
+                </div>
+                <!-- 日報・週報出力 -->
+                <input type="checkbox" class="hidden-input" id="label4">
+                <label for="label4">出力</label>
+                <div class="hidden-list">
+                    <p><a href="#">日報</a></p>
+                    <p><a href="#">週報</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="footer" th:fragment="footer">
+        <small>Copyright© 2020-2021 SHOHEI TOKUMARU All Rights Reserved.</small>
     </div>
-    <div class="header-list">
-      <ul>
-        <li><a href="/task" style="text-decoration:none; color:white;">タスク一覧</a></li>
-        <li><a href="/task/task-add-info" style="text-decoration:none; color:white;">タスク追加</a></li>
-        <li><a href="/project" style="text-decoration:none; color:white;">プロジェクトコード追加</a></li>
-        <li><a href="/charge" style="text-decoration:none; color:white;">チャージコード追加</a></li>
-        <li><a href="/task/task-delete-info" style="text-decoration:none; color:white;">タスク削除</a></li>
-        <li><a href="/login/logout-form" style="text-decoration:none; color:white;">ログアウト</a></li>
-      </ul>
-    </div>
-    <div id="menu-background">
-    </div>
-  </div>
+
 </body>
+
 </html>
