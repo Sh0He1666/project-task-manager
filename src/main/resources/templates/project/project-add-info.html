@@ -50,9 +50,16 @@
                         <div>
                             <form th:object="${projectForm}" th:action="@{'/project'}" method="post">
                                 <ul>
-                                    <li>プロジェクトコード：<input type="text" th:field="*{code}"><a> 例) SSS, JJJ</a></li>
-                                    <p style="margin-bottom:1em;"></p>
-                                    <li>プロジェクト名：<input type="text" th:field="*{name}"><a> 例) 会社名, バグFIX</a></li>
+                                    <li>プロジェクトコード：
+                                    	<input type="text" th:field="*{code}">
+	                                    <span class="error-msg" th:errors="*{code}"></span>
+                                    	<a> 例) SSS, JJJ</a>
+                                    </li>
+                                  	<p style="margin-bottom:1em;"></p>
+                                    <li>プロジェクト名：
+                                    	<input type="text" th:field="*{name}">
+                                    	<span class="error-msg" th:errors="*{name}"></span>
+                                    	<a> 例) 会社名, バグFIX</a></li>
                                 </ul>
                                 <p style="margin-bottom:1em;"></p>
                                 <p>

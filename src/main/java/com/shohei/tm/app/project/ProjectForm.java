@@ -6,8 +6,8 @@ package com.shohei.tm.app.project;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  * フォームからの入力内容を受け取るクラスです。
@@ -16,10 +16,12 @@ import javax.validation.constraints.Pattern;
  */
 public class ProjectForm implements Serializable {
 	@NotEmpty(message="記入必須項目です")
-	@Pattern(regexp="[A-Z]", message="大文字の英字を入力してください")
+	@Size(min=1, max=20)
+	@Pattern(regexp="[A-Z]+", message="大文字の英字を入力してください")
 	private String code; //プロジェクトコード
 	
 	@NotEmpty(message="記入必須項目です")
+	@Size(min=1, max=20)
 	private String name; //プロジェクト名
 	
 	//Setter Getter 

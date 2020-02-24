@@ -57,7 +57,7 @@ public class ProjectController {
 			) {
 		
 		if (bindingResult.hasErrors()) {
-			return "redirect:/project";
+			return gotoProjectAddInfo(model);
 		}
 
 		//プロジェクトインスタンスを生成

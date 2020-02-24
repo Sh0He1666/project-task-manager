@@ -57,7 +57,7 @@ public class ChargeController {
 			) {
 		
 		if (bindingResult.hasErrors()) {
-			return "redirect:/charge";
+			return gotoChargeAddInfo(model);
 		}
 		
 		//プロジェクトインスタンスを生成
