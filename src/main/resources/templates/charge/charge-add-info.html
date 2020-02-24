@@ -50,9 +50,17 @@
                         <div>
                             <form th:object="${chargeForm}" th:action="@{'/charge'}" method="post">
                                 <ul>
-                                    <li>チャージコード：<input type="text" th:field="*{code}"><a> 例) FOO1, E</a></li>
+	                            	<li>チャージコード：
+	                                    <input type="text" th:field="*{code}">
+	                                    <span class="error-msg" th:errors="*{code}"></span>
+	                                    <a> 例) FOO1, E</a>
+	                                </li>
                                     <p style="margin-bottom:1em;"></p>
-                                    <li>チャージ名：<input type="text" th:field="*{name}"><a> 例) 保守, 研究開発</a></li>
+                                    <li>チャージ名：
+                                    	<input type="text" th:field="*{name}">
+                                    	<span class="error-msg" th:errors="*{name}"></span>
+                                    	<a> 例) 保守, 研究開発</a>
+                                    </li>
                                 </ul>
                                 <p style="margin-bottom:1em;"></p>
                                 <p>
