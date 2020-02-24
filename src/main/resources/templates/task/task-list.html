@@ -1,44 +1,83 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8"/>
-	<title th:text="タスク一覧" >タスク一覧</title>
-	<link th:href="@{/css/style_headlist.css}" rel="stylesheet" type="text/css">	
-	<link th:href="@{/css/style_task_list.css}" rel="stylesheet" type="text/css">
-</head>
-<body class="task-list">
-  <div class="header"  th:include="/common.html::headlist"></div>
-<p style="margin-bottom:5em;"></p>  
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
-<div th:each="project : ${project_lists}">
-<p style="margin-bottom:5em;"></p>
-◼️<a class="project-name" th:text="${project.name}">プロジェクト名</a>
-  <table>
-    <tr>
-      <th>タスクID</th>
-      <th>チャージコード</th>
-      <th>タスク名</th>
-      <th>期日</th>
-      <th>進捗状況</th>
-      <th>進捗度(%)</th>
-      <th>進行中タスク</th>
-    </tr>
-    <tr th:each="task : ${task_lists}"
-        th:if="${project.id == task.projectId.id}">
-      <td th:text="${task.code}">SES_001</td>
-      <td th:text="${task.chargeCode.code}">F001</td>
-      <td>
-        <a th:href="@{'/task/' + ${task.id}}" th:text="${task.detail}">
-          ECbeing インフラリプレース
-        </a>
-      </td>
-      <td th:text="${task.deadlineDate}"></td>
-      <td th:text="${task.status}">進行中</td>
-      <td th:text="${task.progressRate}">60%</td>
-      <td><img th:src="@{/images/button-off.jpg}"></td>
-    </tr>
-  </table>
-<p style="margin-bottom:5em;"></p>
-</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TS OPTIMIZER</title>
+    <link th:href="@{/css/normalize.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/style_task_list.css}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header class="top-image-area" th:include="/common.html::body-header">
+    </header>
+    <main>
+        <div class="titlebar-container">
+            <div class="titlebar">
+                <h1 class="title">タスク一覧</h1>
+            </div>
+        </div>
+        <div>
+            <!-- main field -->
+            <div class="main-area">
+                <!-- 機能説明 -->
+                <article>
+                    <h1>Description</h1>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo, aut perferendis delectus explicabo
+                        nisi perspiciatis
+                        temporibus. Assumenda at alias ut illo modi, velit, iure magnam, earum eveniet placeat rem
+                        veritatis.</p>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo, aut perferendis delectus explicabo
+                        nisi perspiciatis
+                        temporibus. Assumenda at alias ut illo modi, velit, iure magnam, earum eveniet placeat rem
+                        veritatis.</p>
+                </article>
+
+                <!-- ここから機能部分 基本的にはここだけ修正する。その他は共通 -->
+                <div>
+                    <div th:each="project : ${project_lists}">
+                        <p style="margin-bottom:5em;"></p>
+                        ◼️<a class="project-name" th:text="${project.name}">プロジェクト名</a>
+                        <table>
+                            <tr>
+                                <th>タスクID</th>
+                                <th>チャージコード</th>
+                                <th>タスク名</th>
+                                <th>期日</th>
+                                <th>進捗状況</th>
+                                <th>進捗度(%)</th>
+                                <th>進行中タスク</th>
+                            </tr>
+                            <tr th:each="task : ${task_lists}" th:if="${project.id == task.projectId.id}">
+                                <td th:text="${task.code}">SES_001</td>
+                                <td th:text="${task.chargeCode.code}">F001</td>
+                                <td>
+                                    <a th:href="@{'/task/' + ${task.id}}" th:text="${task.detail}">
+                                        ECbeing インフラリプレース
+                                    </a>
+                                </td>
+                                <td th:text="${task.deadlineDate}"></td>
+                                <td th:text="${task.status}">進行中</td>
+                                <td th:text="${task.progressRate}">60%</td>
+                                <td><img th:src="@{/images/button-off.jpg}"></td>
+                            </tr>
+                        </table>
+                        <p style="margin-bottom:5em;"></p>
+                    </div>
+                </div>
+            </div>
+            <!-- left side menu -->
+            <div class="left-navi" th:include="/common.html::left-navi">
+            </div>
+        </div>
+    </main>
+
+    <div class="footer" th:include="/common.html::footer">
+        <small>Copyright© 2020-2021 SHOHEI TOKUMARU All Rights Reserved.</small>
+    </div>
+
 </body>
+
 </html>

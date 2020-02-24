@@ -30,6 +30,10 @@ public class TaskDetailForm {
 	
 	private Integer id;
 	
+    private String status; // 進捗状況　0:未着手, 1:進行中 ,2:処理済み 
+	
+	private String progressRate; //進捗度 0 =< progressRate =< 10 
+	
 	@Column(length=1000, nullable=true)
 	private String content;
 	
@@ -46,6 +50,20 @@ public class TaskDetailForm {
 		}
 	public Integer getId() {
 		return this.id;
+		}
+	
+	public void setStatus(String status) {
+		this.status = status;
+		}
+	public String getStatus() {
+		return this.status;
+		}
+	
+	public void setProgressRate(String progressRate) {
+		this.progressRate = progressRate;
+		}
+	public String getProgressRate() {
+		return this.progressRate;
 		}
 	
 	public void setContent(String content) {

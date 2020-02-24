@@ -60,7 +60,7 @@ CREATE TABLE task_history
 	deadline_dt date,
 	-- 0:未着手, 1:進行中 ,2:処理済み
 	status varchar(10) NOT NULL,
-	progress_rt int NOT NULL CONSTRAINT number_check   CHECK(progress_rt >= 0 and progress_rt <= 10),
+	progress_rt varchar(10) NOT NULL,
 	registered_dt timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS /;

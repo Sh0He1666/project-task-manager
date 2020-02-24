@@ -1,49 +1,110 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8"/>
-	<title th:text="タスク一覧" >タスク詳細編集画面</title>
-	<link th:href="@{/css/style_headlist.css}" rel="stylesheet" type="text/css">
-	<link th:href="@{/css/style_task_edit.css}" rel="stylesheet" type="text/css">
-</head>
-<body class="task-list">
-  <div class="header"  th:include="/common.html::headlist"></div>
-<p style="margin-bottom:3em;"></p>  
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
-<div th:with="data=${task_detail_data}">
-  <!-- タイトル -->
-  <div>
-    <h1 th:text="|${data.code} : ${data.detail}|">タスクコード：タスク詳細</h1>
-  </div>
-  <!-- リスト -->
-  <div>
-    <p style="margin-bottom:1em;"></p>
-  </div>
-  <div>
-    <form th:object="${taskDetailForm}"
-          th:action="@{'/task/edit/' + ${data.id}}" method="post">
-      <div>
-        <p>内容：</p>
-        <textarea th:text="${data.content}" name="content"></textarea>
-        <p style="margin-bottom:1em;"></p>
-      </div>
-      <div>
-        <p>課題：</p>
-        <textarea th:text="${data.problem}" name="problem"></textarea>
-        <p style="margin-bottom:1em;"></p>
-      </div>
-      <div>
-        <p>予定：</p>
-        <textarea th:text="${data.plan}" name="plan"></textarea>
-        <p style="margin-bottom:1em;"></p>
-      </div>
-      <p>
-        <input type="submit" value="更新">
-        <input type="reset" value="リセット">
-      </p>
-        <p style="margin-bottom:5em;"></p>
-    </form>
-  </div>
-</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TS OPTIMIZER</title>
+    <link th:href="@{/css/normalize.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/style_task_edit.css}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header class="top-image-area" th:include="/common.html::body-header">
+    </header>
+    <main>
+        <div class="titlebar-container">
+            <div class="titlebar">
+                <h1 class="title">タスク詳細編集</h1>
+            </div>
+        </div>
+        <div>
+            <!-- main field -->
+            <div class="main-area">
+                <!-- 機能説明 -->
+                <article>
+                    <h1>Description</h1>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo, aut perferendis delectus explicabo
+                        nisi perspiciatis
+                        temporibus. Assumenda at alias ut illo modi, velit, iure magnam, earum eveniet placeat rem
+                        veritatis.</p>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo, aut perferendis delectus explicabo
+                        nisi perspiciatis
+                        temporibus. Assumenda at alias ut illo modi, velit, iure magnam, earum eveniet placeat rem
+                        veritatis.</p>
+                </article>
+
+                <!-- ここから機能部分 基本的にはここだけ修正する。その他は共通 -->
+                <div>
+                    <div th:with="data=${task_detail_data}">
+                        <!-- タイトル -->
+                        <div>
+                            <h1 th:text="|${data.code} : ${data.detail}|">タスクコード：タスク詳細</h1>
+                        </div>
+                        <!-- リスト -->
+                        <div>
+                            <p style="margin-bottom:1em;"></p>
+                        </div>
+                        <div>
+                            <form th:object="${taskDetailForm}" th:action="@{'/task/edit/' + ${data.id}}" method="post">
+                                <div>
+                                    <a th:each="code : ${codeList}"
+                                        th:if="${code.genre == 'status' && data.status == code.name}"
+                                        th:text="|ステータス：「 ${data.status} 」 から |">ステータス：</a>
+                                    <select th:field="*{status}">
+                                        <option th:each="code : ${codeList}" th:if="${code.genre == 'status'}"
+                                            th:value="${code.name}">[[${code.name}]]
+                                        </option>
+                                    </select><a> へと変更</a>
+                                    <p style="margin-bottom:1em;"></p>
+                                </div>
+                                <div>
+                                    <a th:each="code : ${codeList}"
+                                        th:if="${code.genre == 'progress_rt' && data.progressRate == code.name}"
+                                        th:text="|進捗率(%)：「 ${data.progressRate} 」 から |">進捗率(%)：</a>
+                                    <select th:field="*{progressRate}">
+                                        <option th:each="code : ${codeList}" th:if="${code.genre == 'progress_rt'}"
+                                            th:value="${code.name}">[[${code.name}]]
+                                        </option>
+                                    </select><a> へと変更</a>
+                                    <p style="margin-bottom:1em;"></p>
+                                </div>
+                                <div>
+                                    <p>内容：</p>
+                                    <textarea th:text="${data.content}" name="content"></textarea>
+                                    <p style="margin-bottom:1em;"></p>
+                                </div>
+                                <div>
+                                    <p>課題：</p>
+                                    <textarea th:text="${data.problem}" name="problem"></textarea>
+                                    <p style="margin-bottom:1em;"></p>
+                                </div>
+                                <div>
+                                    <p>予定：</p>
+                                    <textarea th:text="${data.plan}" name="plan"></textarea>
+                                    <p style="margin-bottom:1em;"></p>
+                                </div>
+                                <p>
+                                    <input type="submit" value="更新">
+                                    <input type="reset" value="リセット">
+                                </p>
+                                <p style="margin-bottom:5em;"></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- left side menu -->
+            <div class="left-navi" th:include="/common.html::left-navi">
+            </div>
+        </div>
+    </main>
+
+    <div class="footer" th:include="/common.html::footer">
+        <small>Copyright© 2020-2021 SHOHEI TOKUMARU All Rights Reserved.</small>
+    </div>
+
 </body>
+
 </html>

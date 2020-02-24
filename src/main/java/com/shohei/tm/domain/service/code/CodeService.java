@@ -25,11 +25,21 @@ public class CodeService {
 	
 	//projectRepositoryをインジェンクション
 	@Autowired
-	CodeRepository CodeRepository;
+	CodeRepository codeRepository;
 	//テスト用にひとまず、projectテーブルのデータを検索するメソッドを実装
 	
 	//登録されているプロジェクトのIDリストを返す
 	public List<Code> findAll() {
-		return CodeRepository.findAll();
+		return codeRepository.findAll();
 	}
+	
+	//genre='status'であるレコードを取得する
+	public List<Code> getStatusList() {
+		return codeRepository.getStatusList();
+	}
+	
+	//genre='status'であるレコードを取得する
+	public List<Code> getProgressRateList() {
+		return codeRepository.getProgressRateList();
+	}	
 }
