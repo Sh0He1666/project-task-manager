@@ -1,54 +1,32 @@
 
-form div textarea{
-	margin: 10px 0px 10px 30px;
-	width: 600px;
-	height: 10em;
+.sub-title {
+	margin: 2rem 0 1rem 0;
+	border-bottom: 2px solid #494848;
+	font-size: 1.5rem;
 }
 
-form p input {
-	float: ;
-	margin: 10px 0px 10px 10px;
-	font-size: 15px;
-	width: 600px;
-	height: 20em;
+.sub-title::before {
+	content: "✔️ ";
 }
 
-form p input:first-child {
-	float: ;
-	font-size: 15px;
-	margin: 10px 0px 10px 500px;
-	width: 70px;
-	height: 20em;
+.sub-main1 {
+	position:relative;
 }
 
-form p input:last-child {
-	float: ;
-	font-size: 15px;
-	margin: 10px 0px 10px 10px;
-	width: 70px;
-	height: 20em;
+.sub-main1 form div {
+	margin: 5px 0 5px 0;
 }
 
-/* ボタン */
-.button {
-	width: 70px;
-	height: 10em;
+.sub-main1 span, p{
+	margin: 0 0 0 2rem;
+	padding: 0 0 0 0;
+	font-size: 1.5rem;
 }
 
-li{
-	font-size: 25px;
-	color: #000;
-	font-weight: bold;	
-}
-
-h1{
-	font-size: 30px;
-	color: #000;
-	font-weight: bold;
-}
-
-p{
-  font-size: 20px;
-  color: #000;
-  font-weight: bold;
+.inputs{
+	position: relative;
+	margin: 3rem 0 0 2rem;
+	padding: 0 0 0 0;
+	font-size: 1.5rem;
+    background-color: red;
 }

@@ -127,7 +127,7 @@ public class TaskController {
 	}
 
 	@RequestMapping(path="task-add-info", method=RequestMethod.GET)
-	String goToTaskAddInfo(Model model) {
+	String gotoTaskAddInfo(Model model) {
 		//カレントのステータスを取得
 		List<Project> currentProjectList = projectService.findAll();
 		List<ChargeCode> currentChargeList = chargeService.findAll();
@@ -147,7 +147,13 @@ public class TaskController {
 	String addTaskInfo(
 			//フォームで入力された情報を保持
 			@Validated TaskForm form,
+			//フォームクラスの入力チェック結果を保持
+			BindingResult bindingResult,
 			Model model) {
+		
+		if (bindingResult.hasErrors()) {
+			return gotoTaskAddInfo(model);
+		}
 		
 		//取得する値を定義
 		Project projectId; //プロジェクトコードのPK

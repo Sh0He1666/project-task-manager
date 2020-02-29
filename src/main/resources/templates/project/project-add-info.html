@@ -8,6 +8,7 @@
     <link th:href="@{/css/normalize.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/style_project_add_info.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/error_msg.css}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -39,32 +40,24 @@
                 <div>
                     <div th:with="data=${task_detail_data}">
                         <!-- タイトル -->
-                        <div>
-                            <h1>◼️追加したいプロジェクトの情報を入力してください。</h1>
-                        </div>
-                        <!-- リスト -->
-                        <div>
-                            <p style="margin-bottom:1em;"></p>
-                        </div>
+                        <h1 class="sub-title">追加したいプロジェクトの情報を入力してください。</h1>
                         <!-- フォーム入力箇所 -->
-                        <div>
+                        <div class="sub-main1">
                             <form th:object="${projectForm}" th:action="@{'/project'}" method="post">
                                 <ul>
-                                    <li>プロジェクトコード：
-                                    	<input type="text" th:field="*{code}">
+                                    <li>プロジェクトコード
+                                    	<p><input class="text-box" placeholder="プロジェクトコードを入力" type="text" th:field="*{code}"></p>
 	                                    <span class="error-msg" th:errors="*{code}"></span>
-                                    	<a> 例) SSS, JJJ</a>
                                     </li>
-                                  	<p style="margin-bottom:1em;"></p>
-                                    <li>プロジェクト名：
-                                    	<input type="text" th:field="*{name}">
+                                    <li>プロジェクト名
+                                    	<p><input class="text-box" placeholder="プロジェクト名を入力" type="text" th:field="*{name}"></p>
                                     	<span class="error-msg" th:errors="*{name}"></span>
-                                    	<a> 例) 会社名, バグFIX</a></li>
+                                    </li>
                                 </ul>
                                 <p style="margin-bottom:1em;"></p>
                                 <p>
-                                    <input type="submit" value="追加">
-                                    <input type="reset" value="リセット">
+                                    <input class="submit1" type="submit" value="追加">
+                                    <input class="submit2" type="reset" value="リセット">
                                 </p>
                             </form>
                         </div>
@@ -72,13 +65,13 @@
                         <div>
                             <p style="margin-bottom:1em;"></p>
                         </div>
-                        <div>
-                            <h1>◼️すでに登録済みのプロジェクト(メモ：ここに削除機能もつける)</h1>
-                            <p style="margin-bottom:1em;"></p>
+                        <!-- すでに登録済みのプロジェクト情報を表示させる -->
+                        <div class="sub-main2">
+                            <h1 class="sub-title">️すでに登録済みのプロジェクト(メモ：ここに削除機能もつける)</h1>
                             <div>
                                 <ul>
                                     <li th:each="project : ${currentProjectList}"
-                                        th:text="|${project.code}, ${project.name}|">
+                                        th:text="|${project.code}：${project.name}|">
                                     </li>
                                 </ul>
                             </div>
@@ -93,7 +86,6 @@
     </main>
 
     <div class="footer" th:include="/common.html::footer">
-        <small>Copyright© 2020-2021 SHOHEI TOKUMARU All Rights Reserved.</small>
     </div>
 
 </body>

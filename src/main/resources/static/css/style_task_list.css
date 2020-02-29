@@ -1,63 +1,104 @@
-
-/* Table */
-
-table{
+/**
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+}
+**/
+table {
+  border-collapse: collapse;
+  margin: 0 0 1rem 0;
+  padding: 0;
   width: 100%;
-  border-collapse:separate;
-  border-spacing: 10;
-}
-
-table th:first-child{ /* up right down left */
-  border-radius: 0;
-}
-
-table th:last-child{
-  border-radius: 0;
-  border-right: 1px solid #3c6690;
-}
-
-table th{
-  text-align: center;
-  color:white;
-  background: linear-gradient(#829ebc,#225588);
-  border-left: 1px solid #3c6690;
-  border-top: 1px solid #3c6690;
-  border-bottom: 1px solid #3c6690;
-  box-shadow: 0px 1px 1px rgba(255,255,255,0.3) inset;
-  width: 12%;
-  padding: 1px 0;
-}
-
-table td{
-  text-align: center;
-  border-left: 1px solid #a8b7c5;
-  border-bottom: 1px solid #a8b7c5;
-  border-top:none;
-  box-shadow: 0px -3px 5px 1px #eee inset;
-  width: 12%;
-  padding: 10px 0;
-}
-
-table td:last-child{
-  border-right: 1px solid #a8b7c5;
-}
-
-table tr:last-child td:first-child {
-  border-radius: 0 0 0 5px;
-}
-
-table tr:last-child td:last-child {
-  border-radius: 0 0 5px 0;
+  table-layout: fixed;
 }
 
 .project-name {
-  font-size: 20px;
-  color: #000;
-  font-weight: bold;	
+    margin: 0 0 2px 0;
+    font-size: 1.25rem;
+    font-weight: bold;
+    position: relative;
+}
+
+.project-name::before {
+    content: '・';
+    font-weight: bold;
+}
+
+table tr {
+  background-color: #fff;
+  border: 1px solid #bbb;
+  padding: .35em;
+}
+table th,
+table td {
+  padding: 1em 10px -1em 1em;
+  border-right: 1px solid #bbb;
+}
+table th {
+  font-size: .85em;
+}
+table thead tr{
+  background-color: #eee;
 }
 /*
-p{
-  font-size: 20px;
-  color: #000;
-  font-weight: bold;
+.task-id {
+   text-align: left;
+   padding: 0 0 0 5px;
 }*/
+.task-id, .price, .charge, .task-name, .deadline, .status, .status-rt, .proceeding {
+   text-align: left;
+   padding: 2px 0 2px 5px;
+}
+
+.task-name a[href] {
+	color: #0000ffbb;
+	font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+    width:100%
+  }
+  table th{
+    background-color: #eee;
+    display: block;
+    border-right: none;
+  }
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #bbb;
+    display: block;
+    font-size: .8em;
+    position: relative;
+    margin: 0 0 0 0;
+    padding: .625em .625em .625em 4em;
+    border-right: none;
+  }
+  
+  table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    position: absolute;
+    left: 10px;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+}

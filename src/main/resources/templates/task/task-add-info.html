@@ -8,6 +8,7 @@
     <link th:href="@{/css/normalize.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/style_task_add_info.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/error_msg.css}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -38,88 +39,78 @@
                 <!-- ここから機能部分 基本的にはここだけ修正する。その他は共通 -->
                 <div>
                     <!-- タイトル -->
-                    <div>
-                        <h1>◼️追加したいタスクを入力してください。</h1>
-                    </div>
-                    <!-- リスト -->
-                    <div>
-                        <p style="margin-bottom:1em;"></p>
-                    </div>
+                    <h1 class="sub-title">追加したいタスクを入力してください。</h1>
                     <!-- フォーム入力箇所 -->
-                    <div>
+                    <div class="sub-main1">
                         <form th:object="${taskForm}" th:action="@{'/task'}" method="post">
                             <ul>
-                                <li class="task-code">タスクコード：
-                                    <select th:field="*{projectId}">
+                                <li>タスクコード
+                                    <p><select class="select-box minimal" th:field="*{projectId}">
                                         <option th:each="project : ${currentProjectList}" th:value="${project.id}">
                                             [[${project.code}]] : [[${project.name}]]
                                         </option>
-                                    </select> ＿
-                                    <input type="text" th:field="*{projectCodeId}"><a> 例) SSS_100, JJJ_555</a>
+                                    </select>　＋
+                                    <input class="text-box task-code" type="text" placeholder="IDを入力" th:field="*{projectCodeId}"><br>
+                                    入力チェック：<input class="text-box check-text" type="text" placeholder="あとでjsでいい感じにする" onKeyUp="alertValue(this)" >
+                                    <span class="error-msg" th:errors="*{projectCodeId}"></span>
+                                    </p>
                                 </li>
-                                <li class="charge-code">チャージコード：
-                                    <select th:field="*{chargeId}">
+                                <li>チャージコード
+                                    <p><select class="select-box minimal" th:field="*{chargeId}">
                                         <option th:each="charge : ${currentChargeList}" th:value="${charge.id}">
                                             [[${charge.code}]] : [[${charge.name}]]
                                         </option>
-                                    </select>
+                                    </select></p>
                                 </li>
-                                <li class="task-name">タスク名：
-                                    <input type="text" th:field="*{detail}"><a> 例) ドメイン変更対応</a>
+                                <li>タスク名
+                                    <p><input class="text-box" type="text" th:field="*{detail}" placeholder="タスク名を入力"></p>
+                                    <span class="error-msg" th:errors="*{detail}"></span>
                                 </li>
-                                <li class="deadline">期日：
-                                    <select th:field="*{year}">
+                                <li>期日
+                                    <p><select class="select-box minimal" th:field="*{year}">
                                         <option th:each="code : ${codeList}" th:if="${code.genre == 'year'}"
                                             th:value="${code.code}">[[${code.name}]]
                                         </option>
-                                    </select><a class="date"> 年 </a>
-                                    <select th:field="*{month}">
+                                    </select><span class="date"> 年 </span>
+                                    <select class="select-box minimal" th:field="*{month}">
                                         <option th:each="code : ${codeList}" th:if="${code.genre == 'month'}"
                                             th:value="${code.code}">[[${code.name}]]
                                         </option>
-                                    </select><a class="date"> 月 </a>
-                                    <select th:field="*{day}">
+                                    </select><span class="date"> 月 </span>
+                                    <select class="select-box minimal" th:field="*{day}">
                                         <option th:each="code : ${codeList}" th:if="${code.genre == 'day'}"
                                             th:value="${code.code}">[[${code.name}]]
                                         </option>
-                                    </select><a class="date"> 日 </a>
+                                    </select><span class="date"> 日 </span></p>
                                 </li>
-                                <p style="margin-bottom:1em;"></p>
-                                <li class="status">ステータス：
-                                    <select th:field="*{status}">
+                                <li>ステータス
+                                    <p><select class="select-box minimal" th:field="*{status}">
                                         <option th:each="code : ${codeList}" th:if="${code.genre == 'status'}"
                                             th:value="${code.name}">[[${code.name}]]
                                         </option>
-                                    </select>
+                                    </select></p>
                                 </li>
-                                <p style="margin-bottom:1em;"></p>
-                                <li class="progress">進捗(%)：
-                                    <select th:field="*{progressRate}">
+                                <li>進捗(%)
+                                    <p><select class="select-box minimal" th:field="*{progressRate}">
                                         <option th:each="code : ${codeList}" th:if="${code.genre == 'progress_rt'}"
                                             th:value="${code.name}">[[${code.name}]]
                                         </option>
-                                    </select>
+                                    </select></p>
                                 </li>
-                                <p style="margin-bottom:1em;"></p>
                             </ul>
-                            <p style="margin-bottom:1em;"></p>
                             <p>
-                                <input type="submit" value="追加">
-                                <input type="reset" value="リセット">
+                                <input class="submit1" type="submit" value="追加">
+                                <input class="submit2" type="reset" value="リセット">
                             </p>
                         </form>
                     </div>
                     <!-- すでに登録済みのプロジェクト情報を表示させる -->
-                    <div>
-                        <p style="margin-bottom:1em;"></p>
-                    </div>
-                    <div>
-                        <h1>◼️すでに登録済みのタスク一覧</h1>
-                        <p style="margin-bottom:1em;"></p>
+                    <div class="sub-main2">
+                        <h1 class="sub-title">️すでに登録済みのタスク一覧</h1>
                         <div>
                             <ul>
                                 <li th:each="task : ${currentTaskList}"
-                                    th:text="|${task.code}, ${task.chargeCode.code}, ${task.detail}|">
+                                    th:text="|${task.code}：${task.detail}|">
                                 </li>
                             </ul>
                         </div>
@@ -133,7 +124,6 @@
     </main>
 
     <div class="footer" th:include="/common.html::footer">
-        <small>Copyright© 2020-2021 SHOHEI TOKUMARU All Rights Reserved.</small>
     </div>
 </body>
 </html>
