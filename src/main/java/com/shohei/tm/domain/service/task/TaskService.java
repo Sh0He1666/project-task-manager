@@ -47,9 +47,14 @@ public class TaskService {
 		return taskHistoryRepository.updateTaskDetailById(status, progressRate, content, problem, plan, id);
 	}
 	
-	//プロジェクト情報を追加するメソッド
+	//タスク情報を追加するメソッド
 	public void save(TaskHistory taskHistory) {
 		taskHistoryRepository.save(taskHistory);
+	}
+	
+	//受け取ったIDのタスク情報を削除する
+	public void deleteTaskInfoById(Integer id) {
+		taskHistoryRepository.deleteById(id);			
 	}
 
 }

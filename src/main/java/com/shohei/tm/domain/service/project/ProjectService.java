@@ -42,4 +42,9 @@ public class ProjectService {
 	public void save(Project project) {
 		projectRepository.save(project);
 	}
+	
+	//delete
+	public void deleteProjectInfoById(Integer id) {
+		projectRepository.deleteById(id);
+	}
 }

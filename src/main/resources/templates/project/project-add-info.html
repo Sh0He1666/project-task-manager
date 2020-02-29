@@ -46,12 +46,14 @@
                             <form th:object="${projectForm}" th:action="@{'/project'}" method="post">
                                 <ul>
                                     <li>プロジェクトコード
-                                    	<p><input class="text-box" placeholder="プロジェクトコードを入力" type="text" th:field="*{code}"></p>
-	                                    <span class="error-msg" th:errors="*{code}"></span>
+                                        <p><input class="text-box" placeholder="プロジェクトコードを入力" type="text"
+                                                th:field="*{code}"></p>
+                                        <span class="error-msg" th:errors="*{code}"></span>
                                     </li>
                                     <li>プロジェクト名
-                                    	<p><input class="text-box" placeholder="プロジェクト名を入力" type="text" th:field="*{name}"></p>
-                                    	<span class="error-msg" th:errors="*{name}"></span>
+                                        <p><input class="text-box" placeholder="プロジェクト名を入力" type="text"
+                                                th:field="*{name}"></p>
+                                        <span class="error-msg" th:errors="*{name}"></span>
                                     </li>
                                 </ul>
                                 <p style="margin-bottom:1em;"></p>
@@ -67,13 +69,34 @@
                         </div>
                         <!-- すでに登録済みのプロジェクト情報を表示させる -->
                         <div class="sub-main2">
-                            <h1 class="sub-title">️すでに登録済みのプロジェクト(メモ：ここに削除機能もつける)</h1>
+                            <h1 class="sub-title">️すでに登録済みのプロジェクト</h1>
                             <div>
-                                <ul>
-                                    <li th:each="project : ${currentProjectList}"
-                                        th:text="|${project.code}：${project.name}|">
-                                    </li>
-                                </ul>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="column-name">
+                                                <div>タスクコード</div>
+                                            </th>
+                                            <th class="column-name">
+                                                <div>タスク名</div>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="project : ${currentProjectList}">
+                                            <td class="col" th:text="${project.code}"></td>
+                                            <td class="col" th:text="${project.name}"></td>
+                                            <td class="col-delete">
+                                                　　<form th:object="${projectForm}"
+                                                    th:action="@{'/project/delete/' + ${project.id}}"
+                                                    method="post">
+                                                    <input type="submit" value="削除">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
