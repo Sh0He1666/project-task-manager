@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.shohei.tm.app.converter.LocalDateConverter;
 import com.shohei.tm.domain.model.ChargeCode;
@@ -26,7 +27,8 @@ public class TaskForm {
 	
 	@NotNull
 	private Project projectId; //プロジェクトコードのPK
-
+	
+	@Size(min=1, max=20, message="未記入か、数字以外の記載があります。")
 	private String projectCodeId; //プロジェクトコードに付加されるID
 	
 	@Column(length=20, nullable=false)
@@ -36,7 +38,7 @@ public class TaskForm {
 	private ChargeCode chargeId; //チャージコードのPK
 	
 	@NotNull
-	@Column(length=100, nullable=false)
+	@Size(min=1, max=100, message="未記入か、文字数が100を超えています。")
 	private String detail; //タスクの題名 varchar(100)
 
 	@Column(name="deadline_dt", columnDefinition = "DATE" ,nullable=true)

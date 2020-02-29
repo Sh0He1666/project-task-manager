@@ -8,6 +8,7 @@
     <link th:href="@{/css/normalize.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/style_task_edit.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/error_msg.css}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -39,57 +40,48 @@
                 <div>
                     <div th:with="data=${task_detail_data}">
                         <!-- タイトル -->
-                        <div>
-                            <h1 th:text="|${data.code} : ${data.detail}|">タスクコード：タスク詳細</h1>
-                        </div>
+                        <h1 class="sub-title" th:text="|${data.code} : ${data.detail}|">タスクコード：タスク詳細</h1>
                         <!-- リスト -->
-                        <div>
-                            <p style="margin-bottom:1em;"></p>
-                        </div>
-                        <div>
+                        <div class="sub-main1">
                             <form th:object="${taskDetailForm}" th:action="@{'/task/edit/' + ${data.id}}" method="post">
                                 <div>
-                                    <a th:each="code : ${codeList}"
+                                    <span th:each="code : ${codeList}"
                                         th:if="${code.genre == 'status' && data.status == code.name}"
-                                        th:text="|ステータス：「 ${data.status} 」 から |">ステータス：</a>
-                                    <select th:field="*{status}">
+                                        th:text="|ステータス：「 ${data.status} 」 から |">ステータス：</span>
+                                    <select class="select-box minimal" th:field="*{status}">
                                         <option th:each="code : ${codeList}" th:if="${code.genre == 'status'}"
                                             th:value="${code.name}">[[${code.name}]]
                                         </option>
-                                    </select><a> へと変更</a>
-                                    <p style="margin-bottom:1em;"></p>
+                                    </select><span>へと変更</span>
                                 </div>
                                 <div>
-                                    <a th:each="code : ${codeList}"
+                                    <span th:each="code : ${codeList}"
                                         th:if="${code.genre == 'progress_rt' && data.progressRate == code.name}"
-                                        th:text="|進捗率(%)：「 ${data.progressRate} 」 から |">進捗率(%)：</a>
-                                    <select th:field="*{progressRate}">
+                                        th:text="|進捗率(%)：「 ${data.progressRate} 」 から |">進捗率(%)：</span>
+                                    <select class="select-box minimal" th:field="*{progressRate}">
                                         <option th:each="code : ${codeList}" th:if="${code.genre == 'progress_rt'}"
                                             th:value="${code.name}">[[${code.name}]]
                                         </option>
-                                    </select><a> へと変更</a>
-                                    <p style="margin-bottom:1em;"></p>
+                                    </select><span> へと変更</span>
                                 </div>
                                 <div>
                                     <p>内容：</p>
-                                    <textarea th:text="${data.content}" name="content"></textarea>
-                                    <p style="margin-bottom:1em;"></p>
+                                    <textarea id="textarea" th:text="${data.content}" name="content"></textarea>
                                 </div>
                                 <div>
                                     <p>課題：</p>
-                                    <textarea th:text="${data.problem}" name="problem"></textarea>
-                                    <p style="margin-bottom:1em;"></p>
+                                    <textarea id="textarea" th:text="${data.problem}" name="problem"></textarea>
                                 </div>
                                 <div>
                                     <p>予定：</p>
-                                    <textarea th:text="${data.plan}" name="plan"></textarea>
-                                    <p style="margin-bottom:1em;"></p>
+                                    <textarea id="textarea" th:text="${data.plan}" name="plan"></textarea>
                                 </div>
-                                <p>
-                                    <input type="submit" value="更新">
-                                    <input type="reset" value="リセット">
-                                </p>
-                                <p style="margin-bottom:5em;"></p>
+                                <div>
+                                    <p class="inputs">
+                                        <input class="submit1" type="submit" value="更新">
+                                        <input class="submit2" type="reset" value="リセット">
+                                    </p>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -102,7 +94,6 @@
     </main>
 
     <div class="footer" th:include="/common.html::footer">
-        <small>Copyright© 2020-2021 SHOHEI TOKUMARU All Rights Reserved.</small>
     </div>
 
 </body>

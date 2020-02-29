@@ -38,33 +38,33 @@
                 <!-- ここから機能部分 基本的にはここだけ修正する。その他は共通 -->
                 <div>
                     <div th:each="project : ${project_lists}">
-                        <p style="margin-bottom:5em;"></p>
-                        ◼️<a class="project-name" th:text="${project.name}">プロジェクト名</a>
                         <table>
-                            <tr>
-                                <th>タスクID</th>
-                                <th>チャージコード</th>
-                                <th>タスク名</th>
-                                <th>期日</th>
-                                <th>進捗状況</th>
-                                <th>進捗度(%)</th>
-                                <th>進行中タスク</th>
-                            </tr>
-                            <tr th:each="task : ${task_lists}" th:if="${project.id == task.projectId.id}">
-                                <td th:text="${task.code}">SES_001</td>
-                                <td th:text="${task.chargeCode.code}">F001</td>
-                                <td>
-                                    <a th:href="@{'/task/' + ${task.id}}" th:text="${task.detail}">
-                                        ECbeing インフラリプレース
-                                    </a>
-                                </td>
-                                <td th:text="${task.deadlineDate}"></td>
-                                <td th:text="${task.status}">進行中</td>
-                                <td th:text="${task.progressRate}">60%</td>
-                                <td><img th:src="@{/images/button-off.jpg}"></td>
-                            </tr>
+                            <p class="project-name" th:text="${project.name}">プロジェクト名</p>
+                            <thead>
+                                <tr>
+                                    <th scope="col">タスクID</th>
+                                    <th scope="col">チャージコード</th>
+                                    <th scope="col">タスク名</th>
+                                    <th scope="col">完了期日</th>
+                                    <th scope="col">進捗状況</th>
+                                    <th scope="col">進捗度(%)</th>
+                                    <th scope="col">進行中タスク</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="task : ${task_lists}" th:if="${project.id == task.projectId.id}">
+                                    <td data-label="タスクID" class="task-id" th:text="${task.code}"></td>
+                                    <td data-label="チャージコード" class="charge" th:text="${task.chargeCode.code}"></td>
+                                    <td data-label="タスク名" class="task-name">
+                                        <a th:href="@{'/task/' + ${task.id}}" th:text="${task.detail}"></a>
+                                    </td>
+                                    <td data-label="完了期日" class="deadline" th:text="${task.deadlineDate}"></td>
+                                    <td data-label="進捗状況" class="status" th:text="${task.status}"></td>
+                                    <td data-label="進捗度(%)" class="status-rt" th:text="${task.progressRate}"></td>
+                                    <td data-label="進行中タスク" class="proceeding">default</td>
+                                </tr>
+                            </tbody>
                         </table>
-                        <p style="margin-bottom:5em;"></p>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,6 @@
     </main>
 
     <div class="footer" th:include="/common.html::footer">
-        <small>Copyright© 2020-2021 SHOHEI TOKUMARU All Rights Reserved.</small>
     </div>
 
 </body>
