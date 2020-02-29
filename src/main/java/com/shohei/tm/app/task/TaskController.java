@@ -141,6 +141,25 @@ public class TaskController {
 		model.addAttribute("codeList", codeList);		
 		return "task/task-add-info";
 	}
+
+	/**
+	 * タスク情報を削除する
+	 * 渡す値：id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(path="task-add-info/delete/{id}", method=RequestMethod.POST)
+	String deleteTaskInfo(
+			//@PathVariable リクエストパラメータ"roomId"に入っている値を取得する
+			@PathVariable("id") Integer id, 
+			Model model			
+			) {
+				
+		//データを削除
+		taskService.deleteTaskInfoById(id); 
+		return this.gotoTaskAddInfo(model);
+	}
+
 	
 	//タスク情報追加
 	@RequestMapping(method=RequestMethod.POST)

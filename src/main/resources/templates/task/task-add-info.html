@@ -46,56 +46,59 @@
                             <ul>
                                 <li>タスクコード
                                     <p><select class="select-box minimal" th:field="*{projectId}">
-                                        <option th:each="project : ${currentProjectList}" th:value="${project.id}">
-                                            [[${project.code}]] : [[${project.name}]]
-                                        </option>
-                                    </select>　＋
-                                    <input class="text-box task-code" type="text" placeholder="IDを入力" th:field="*{projectCodeId}"><br>
-                                    入力チェック：<input class="text-box check-text" type="text" placeholder="あとでjsでいい感じにする" onKeyUp="alertValue(this)" >
-                                    <span class="error-msg" th:errors="*{projectCodeId}"></span>
+                                            <option th:each="project : ${currentProjectList}" th:value="${project.id}">
+                                                [[${project.code}]] : [[${project.name}]]
+                                            </option>
+                                        </select>　＋
+                                        <input class="text-box task-code" type="text" placeholder="IDを入力"
+                                            th:field="*{projectCodeId}"><br>
+                                        入力チェック：<input class="text-box check-text" type="text"
+                                            placeholder="あとでjsでいい感じにする" onKeyUp="alertValue(this)">
+                                        <span class="error-msg" th:errors="*{projectCodeId}"></span>
                                     </p>
                                 </li>
                                 <li>チャージコード
                                     <p><select class="select-box minimal" th:field="*{chargeId}">
-                                        <option th:each="charge : ${currentChargeList}" th:value="${charge.id}">
-                                            [[${charge.code}]] : [[${charge.name}]]
-                                        </option>
-                                    </select></p>
+                                            <option th:each="charge : ${currentChargeList}" th:value="${charge.id}">
+                                                [[${charge.code}]] : [[${charge.name}]]
+                                            </option>
+                                        </select></p>
                                 </li>
                                 <li>タスク名
-                                    <p><input class="text-box" type="text" th:field="*{detail}" placeholder="タスク名を入力"></p>
+                                    <p><input class="text-box" type="text" th:field="*{detail}" placeholder="タスク名を入力">
+                                    </p>
                                     <span class="error-msg" th:errors="*{detail}"></span>
                                 </li>
                                 <li>期日
                                     <p><select class="select-box minimal" th:field="*{year}">
-                                        <option th:each="code : ${codeList}" th:if="${code.genre == 'year'}"
-                                            th:value="${code.code}">[[${code.name}]]
-                                        </option>
-                                    </select><span class="date"> 年 </span>
-                                    <select class="select-box minimal" th:field="*{month}">
-                                        <option th:each="code : ${codeList}" th:if="${code.genre == 'month'}"
-                                            th:value="${code.code}">[[${code.name}]]
-                                        </option>
-                                    </select><span class="date"> 月 </span>
-                                    <select class="select-box minimal" th:field="*{day}">
-                                        <option th:each="code : ${codeList}" th:if="${code.genre == 'day'}"
-                                            th:value="${code.code}">[[${code.name}]]
-                                        </option>
-                                    </select><span class="date"> 日 </span></p>
+                                            <option th:each="code : ${codeList}" th:if="${code.genre == 'year'}"
+                                                th:value="${code.code}">[[${code.name}]]
+                                            </option>
+                                        </select><span class="date"> 年 </span>
+                                        <select class="select-box minimal" th:field="*{month}">
+                                            <option th:each="code : ${codeList}" th:if="${code.genre == 'month'}"
+                                                th:value="${code.code}">[[${code.name}]]
+                                            </option>
+                                        </select><span class="date"> 月 </span>
+                                        <select class="select-box minimal" th:field="*{day}">
+                                            <option th:each="code : ${codeList}" th:if="${code.genre == 'day'}"
+                                                th:value="${code.code}">[[${code.name}]]
+                                            </option>
+                                        </select><span class="date"> 日 </span></p>
                                 </li>
                                 <li>ステータス
                                     <p><select class="select-box minimal" th:field="*{status}">
-                                        <option th:each="code : ${codeList}" th:if="${code.genre == 'status'}"
-                                            th:value="${code.name}">[[${code.name}]]
-                                        </option>
-                                    </select></p>
+                                            <option th:each="code : ${codeList}" th:if="${code.genre == 'status'}"
+                                                th:value="${code.name}">[[${code.name}]]
+                                            </option>
+                                        </select></p>
                                 </li>
                                 <li>進捗(%)
                                     <p><select class="select-box minimal" th:field="*{progressRate}">
-                                        <option th:each="code : ${codeList}" th:if="${code.genre == 'progress_rt'}"
-                                            th:value="${code.name}">[[${code.name}]]
-                                        </option>
-                                    </select></p>
+                                            <option th:each="code : ${codeList}" th:if="${code.genre == 'progress_rt'}"
+                                                th:value="${code.name}">[[${code.name}]]
+                                            </option>
+                                        </select></p>
                                 </li>
                             </ul>
                             <p>
@@ -108,11 +111,31 @@
                     <div class="sub-main2">
                         <h1 class="sub-title">️すでに登録済みのタスク一覧</h1>
                         <div>
-                            <ul>
-                                <li th:each="task : ${currentTaskList}"
-                                    th:text="|${task.code}：${task.detail}|">
-                                </li>
-                            </ul>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="column-name">
+                                            <div>タスクコード</div>
+                                        </th>
+                                        <th class="column-name">
+                                            <div>タスク名</div>
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="task : ${currentTaskList}">
+                                        <td class="col" th:text="${task.code}"></td>
+                                        <td class="col" th:text="${task.detail}"></td>
+                                        <td class="col-delete">
+                                            　　<form th:object="${taskForm}"
+                                                th:action="@{'/task/task-add-info/delete/' + ${task.id}}" method="post">
+                                                <input type="submit" value="削除">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -126,4 +149,5 @@
     <div class="footer" th:include="/common.html::footer">
     </div>
 </body>
+
 </html>

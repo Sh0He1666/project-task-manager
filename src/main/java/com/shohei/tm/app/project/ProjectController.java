@@ -73,6 +73,20 @@ public class ProjectController {
 		return "redirect:/project";
 	}
 	
+	/**
+	 * プロジェクト情報削除
+	 * 渡す値：id
+	 * @return
+	 */
+	@RequestMapping(path="/delete/{id}", method=RequestMethod.POST)
+	String deleteProjectInfo(
+			@PathVariable("id") Integer id, 
+			Model model
+			) {
+		projectService.deleteProjectInfoById(id);
+		return gotoProjectAddInfo(model);
+	}
+	
 	@ModelAttribute
 	ProjectForm setUpProjectForm() {
 		ProjectForm form = new ProjectForm();

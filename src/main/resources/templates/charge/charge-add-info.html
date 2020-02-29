@@ -62,13 +62,34 @@
                         </div>
                         <!-- すでに登録済みのチャージ情報を表示させる -->
                         <div class="sub-main2">
-                            <h1 class="sub-title">すでに登録済みのチャージコード(メモ：ここに削除機能もつける)</h1>
+                            <h1 class="sub-title">すでに登録済みのチャージコード</h1>
                             <div>
-                                <ul>
-                                    <li th:each="charge : ${currentChargeList}"
-                                        th:text="|${charge.code}：${charge.name}|">
-                                    </li>
-                                </ul>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="column-name">
+                                                <div>タスクコード</div>
+                                            </th>
+                                            <th class="column-name">
+                                                <div>タスク名</div>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="charge : ${currentChargeList}">
+                                            <td class="col" th:text="${charge.code}"></td>
+                                            <td class="col" th:text="${charge.name}"></td>
+                                            <td class="col-delete">
+                                                　　<form th:object="${chargeForm}"
+                                                    th:action="@{'/charge/delete/' + ${charge.id}}"
+                                                    method="post">
+                                                    <input type="submit" value="削除">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

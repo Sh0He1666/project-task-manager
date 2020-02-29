@@ -44,4 +44,9 @@ public class ChargeService {
 	public void save(ChargeCode charge) {
 		chargeCodeRepository.save(charge);
 	}
+	
+	//delete
+	public void deleteChargeInfoById(Integer id) {
+		chargeCodeRepository.deleteById(id);
+	}
 }
