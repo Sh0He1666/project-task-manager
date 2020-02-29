@@ -15,13 +15,14 @@ import javax.validation.constraints.Size;
  *
  */
 public class ChargeForm implements Serializable {
-	@NotEmpty(message="記入必須項目です")
-	@Size(min=1, max=20)
-	@Pattern(regexp="[0-9a-zA-Z]+", message="大文字の英字を入力してください")
+
+	@Pattern(regexp="[0-9a-zA-Z]+", message="未記入か、英数字以外の記入があります。")
+	@Size(min=1, max=20, message="")
 	private String code; //チャージコード
 	
-	@NotEmpty(message="記入必須項目です")
-	@Size(min=1, max=20)
+
+	@NotEmpty(message="")
+	@Size(min=1, max=20, message="未記入か、20文字を超えています")
 	private String name; //チャージ名
 	
 	//Setter Getter 

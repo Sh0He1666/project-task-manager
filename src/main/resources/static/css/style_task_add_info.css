@@ -1,56 +1,27 @@
 
-form p input {
-	float: ;
-	font-size: 20px;
-	margin: 10px 0px 10px 500px;
-	width: 70px;
-	height: 30em;
+.sub-title {
+	margin: 2rem 0 1rem 0;
+	border-bottom: 2px solid #494848;
+	font-size: 1.5rem;
 }
 
-form p input:first-child {
-	float: ;
-	font-size: 30px;
-	margin: 10px 0px 10px 500px;
-	width: 70px;
-	height: 40em;
+.sub-title::before {
+	content: "✔️ ";
 }
 
-form p input:last-child {
-	float: ;
-	font-size: 20px;
-	margin: 10px 0px 10px 10px;
-	width: 70px;
-	height: 30em;
+.sub-main1 {
+	position:relative;
 }
 
-form ul li input {
-	font-size: 20px;
-	margin: 10px 0px 10px 0px;
-	width: 20%;
-	height: 2em;
+.sub-main1 li, .sub-main2 li {
+	margin: 0 0 0.5rem 2rem;
+	padding: 0 0 0 0;
+	font-size: 1.5rem;
 }
 
-form ul li a {
-    font-size: 20px;
-    color: blue;
-    font-weight: normal;
+.task-code {
+	width: 8rem;
+	font-size: 16px;
 }
 
-div form ul li{
-	font-size: 25px;
-	color: #000;
-	font-weight: bold;	
-}
 
-div ul li {
-	font-size: 23px;
-	margin: 10px 0px 10px 10px;
-	color: #000;
-	font-weight: normal;	
-}
-
-h1{
-	font-size: 25px;
-	color: #000;
-	font-weight: bold;
-}

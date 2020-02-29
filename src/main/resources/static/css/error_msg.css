@@ -1,0 +1,12 @@
+.error-msg {
+	display: inline-block;
+	margin: 0 0 1rem 0;
+	width: 100%;
+	text-align: left;
+	color: red;
+	font-weight: none;
+	font-size: 0.8rem;
+}
+
+.error-msg::before {
+}

@@ -15,13 +15,11 @@ import javax.validation.constraints.Size;
  *
  */
 public class ProjectForm implements Serializable {
-	@NotEmpty(message="記入必須項目です")
-	@Size(min=1, max=20)
-	@Pattern(regexp="[A-Z]+", message="大文字の英字を入力してください")
+	@Size(min=1, max=20, message="")
+	@Pattern(regexp="[A-Z]+", message="未記入か、大文字のアルファベト以外を記載しています。")
 	private String code; //プロジェクトコード
 	
-	@NotEmpty(message="記入必須項目です")
-	@Size(min=1, max=20)
+	@Size(min=1, max=20, message="未記入か、20文字を超えています")
 	private String name; //プロジェクト名
 	
 	//Setter Getter 
