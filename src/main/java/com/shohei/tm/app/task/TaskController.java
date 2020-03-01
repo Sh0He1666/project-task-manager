@@ -5,6 +5,7 @@
 package com.shohei.tm.app.task;
 
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.shohei.tm.app.converter.LocalDateConverter;
-import com.shohei.tm.app.project.ProjectForm;
 import com.shohei.tm.domain.model.ChargeCode;
 import com.shohei.tm.domain.model.Code;
 import com.shohei.tm.domain.model.Project;
@@ -77,17 +77,19 @@ public class TaskController {
 	 * @return
 	 */
 	@RequestMapping(path="{id}", method=RequestMethod.GET)
-	String goToTaskEdit(@PathVariable("id") Integer id, Model model) {
+	String goToTaskEdit(@PathVariable("id") Integer id,
+			Model model) {
 		//パスに入力されたidのデータを取得
 		TaskHistory taskDetailData = taskService.findOne(id);
-		//List<Code> statusList = codeService.getStatusList();
-		//List<Code> progressRateList = codeService.getProgressRateList();
 		List<Code> codeList = codeService.findAll();
+					
 		//取得した値をModelに格納
 		model.addAttribute("task_detail_data", taskDetailData);
 		model.addAttribute("codeList", codeList);
-		//model.addAttribute("statusList", statusList);
-		//model.addAttribute("progressRateList", progressRateList);
+		model.addAttribute("year", getDevidedDate("year", taskDetailData.getDeadlineDate()));
+		model.addAttribute("month", getDevidedDate("month", taskDetailData.getDeadlineDate()));
+		model.addAttribute("day", getDevidedDate("day", taskDetailData.getDeadlineDate()));
+		
 		return "task/task-edit";
 	}
 
@@ -101,16 +103,10 @@ public class TaskController {
 	String updateTaskDetail(
 			//フォームで入力された情報を保持
 			@Validated TaskDetailForm form, 
-			//フォームクラスの入力チェック結果を保持
-			BindingResult bindingResult,
 			//@PathVariable リクエストパラメータ"roomId"に入っている値を取得する
 			@PathVariable("id") Integer id, 
 			Model model			
 			) {
-		
-		if (bindingResult.hasErrors()) {
-			return "redirect:/task/{id}";
-		}
 		
 		//フォームの入力値を取得
 		String status = form.getStatus();
@@ -118,12 +114,14 @@ public class TaskController {
 		String content = form.getContent();
 		String problem = form.getProblem();
 		String plan = form.getPlan();
+		LocalDate deadlineDate = createDeadlineDate(form.getYear(), form.getMonth(), form.getDay());
+
 				
 		//データを更新
-		taskService.updateTaskDetailById(status, progressRate, content, problem, plan, id);
+		taskService.updateTaskDetailById(status, progressRate, deadlineDate, content, problem, plan, id);
 		//return "redirect:/task/{id}";
-		result = this.goToTaskEdit(id, model);
-		return result;
+		
+		return this.goToTaskEdit(id, model);
 	}
 
 	@RequestMapping(path="task-add-info", method=RequestMethod.GET)
@@ -138,7 +136,11 @@ public class TaskController {
 		model.addAttribute("currentProjectList", currentProjectList);
 		model.addAttribute("currentChargeList", currentChargeList);		
 		model.addAttribute("currentTaskList", currentTaskList);		
-		model.addAttribute("codeList", codeList);		
+		model.addAttribute("codeList", codeList);
+		model.addAttribute("year", getCurrentDate("year"));
+		model.addAttribute("month", getCurrentDate("month"));
+		model.addAttribute("day", getCurrentDate("day"));
+		
 		return "task/task-add-info";
 	}
 
@@ -161,7 +163,13 @@ public class TaskController {
 	}
 
 	
-	//タスク情報追加
+	/**
+	 * タスク情報を追加する
+	 * @param form
+	 * @param bindingResult
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(method=RequestMethod.POST)
 	String addTaskInfo(
 			//フォームで入力された情報を保持
@@ -227,14 +235,49 @@ public class TaskController {
 		TaskForm form = new TaskForm();
 		return form;
 	}
-
+	
 	//リクエストパラメータをバインドする
 	@ModelAttribute
 	TaskDetailForm setUpTaskDetailForm() {
 		TaskDetailForm form = new TaskDetailForm();
 		return form;
 	}
+	
+	//LocalDate(yyyy-mm-dd)を文字列の年月日に分解して返す
+	private String getDevidedDate(String flg, LocalDate date) {
+		if(flg.equals("year")) {
+			return String.valueOf(date.getYear());
+		} else if (flg.equals("month")) {
+			return String.valueOf(date.getMonthValue());
+		} else {
+			return String.valueOf(date.getDayOfMonth());
+		}
+	}
 
+	//カレントの年月日を返すメソッド
+	private String getCurrentDate(String flg) {
+		Calendar cal = Calendar.getInstance();
+		if (flg.equals("year")) {			
+			String v = String.valueOf(cal.get(Calendar.YEAR));
+			if (v.length() == 1) {
+				v = "0" + v;
+			}
+			return v;
+		} else if (flg.equals("month")) {
+			String v = String.valueOf(cal.get(Calendar.MONTH) + 1);
+			if (v.length() == 1) {
+				v = "0" + v;
+			}
+			return v;			
+		} else {
+			String v = String.valueOf(cal.get(Calendar.DATE));
+			if (v.length() == 1) {
+				v = "0" + v;
+			}
+			return v;			
+		}
+	}
+	
 	//DeadlineDateを生成するメソッド
 	private LocalDate createDeadlineDate(String year, String month, String day) {
 		LocalDateConverter conv = new LocalDateConverter();

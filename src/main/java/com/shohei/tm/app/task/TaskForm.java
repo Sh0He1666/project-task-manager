@@ -41,8 +41,8 @@ public class TaskForm {
 	@Size(min=1, max=100, message="未記入か、文字数が100を超えています。")
 	private String detail; //タスクの題名 varchar(100)
 
-	@Column(name="deadline_dt", columnDefinition = "DATE" ,nullable=true)
-	private LocalDate deadlineDate; //期日 
+//	@Column(name="deadline_dt", columnDefinition = "DATE" ,nullable=true)
+//	private LocalDate deadlineDate; //期日 
 	
 	private String year;
 

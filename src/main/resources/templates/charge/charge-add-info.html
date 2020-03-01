@@ -9,6 +9,7 @@
     <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/style_charge_add_info.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/error_msg.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/sub_table.css}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -17,7 +18,7 @@
     <main>
         <div class="titlebar-container">
             <div class="titlebar">
-                <h1 class="title">チャージ情報追加・削除</h1>
+                <h1 class="title">CG情報追加・削除</h1>
             </div>
         </div>
         <div>
@@ -40,16 +41,16 @@
                 <div>
                     <div th:with="data=${task_detail_data}">
                         <!-- タイトル -->
-                        <h1 class="sub-title">追加したいチャージコード情報を入力してください。</h1>
+                        <h1 class="sub-title">追加したいCG情報を入力してください。</h1>
                         <!-- フォーム入力箇所 -->
                         <div class="sub-main1">
                             <form th:object="${chargeForm}" th:action="@{'/charge'}" method="post">
                                 <ul>
-                                    <li>チャージコード
+                                    <li>CGコード
                                         <p><input class="text-box" placeholder="チャージコードを入力" type="text" th:field="*{code}"></p>
                                         <span class="error-msg" th:errors="*{code}"></span>
                                     </li>
-                                    <li>チャージ名
+                                    <li>CG名
                                         <p><input class="text-box" placeholder="チャージ名を入力" type="text" th:field="*{name}"></p>
                                         <span class="error-msg" th:errors="*{name}"></span>
                                     </li>
@@ -62,29 +63,29 @@
                         </div>
                         <!-- すでに登録済みのチャージ情報を表示させる -->
                         <div class="sub-main2">
-                            <h1 class="sub-title">すでに登録済みのチャージコード</h1>
-                            <div>
+                            <h1 class="sub-title">すでに登録済みのCGコード</h1>
+                            <div class="sub-table">
                                 <table>
                                     <thead>
                                         <tr>
                                             <th class="column-name">
-                                                <div>タスクコード</div>
+                                                <div>CGコード</div>
                                             </th>
                                             <th class="column-name">
-                                                <div>タスク名</div>
+                                                <div>CG名</div>
                                             </th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr th:each="charge : ${currentChargeList}">
-                                            <td class="col" th:text="${charge.code}"></td>
-                                            <td class="col" th:text="${charge.name}"></td>
+                                            <td class="col-code" th:text="${charge.code}"></td>
+                                            <td class="col-name" th:text="${charge.name}"></td>
                                             <td class="col-delete">
                                                 　　<form th:object="${chargeForm}"
                                                     th:action="@{'/charge/delete/' + ${charge.id}}"
                                                     method="post">
-                                                    <input type="submit" value="削除">
+                                                    <input class="submit" type="submit" value="削除">
                                                 </form>
                                             </td>
                                         </tr>
