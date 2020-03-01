@@ -9,6 +9,7 @@
     <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/style_project_add_info.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/error_msg.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/sub_table.css}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -40,18 +41,20 @@
                 <div>
                     <div th:with="data=${task_detail_data}">
                         <!-- タイトル -->
-                        <h1 class="sub-title">追加したいプロジェクトの情報を入力してください。</h1>
+                        <h1 class="sub-title">追加したいPJの情報を入力してください。</h1>
                         <!-- フォーム入力箇所 -->
                         <div class="sub-main1">
                             <form th:object="${projectForm}" th:action="@{'/project'}" method="post">
                                 <ul>
-                                    <li>プロジェクトコード
-                                    	<p><input class="text-box" placeholder="プロジェクトコードを入力" type="text" th:field="*{code}"></p>
-	                                    <span class="error-msg" th:errors="*{code}"></span>
+                                    <li>PJコード
+                                        <p><input class="text-box" placeholder="プロジェクトコードを入力" type="text"
+                                                th:field="*{code}"></p>
+                                        <span class="error-msg" th:errors="*{code}"></span>
                                     </li>
-                                    <li>プロジェクト名
-                                    	<p><input class="text-box" placeholder="プロジェクト名を入力" type="text" th:field="*{name}"></p>
-                                    	<span class="error-msg" th:errors="*{name}"></span>
+                                    <li>PJ名
+                                        <p><input class="text-box" placeholder="プロジェクト名を入力" type="text"
+                                                th:field="*{name}"></p>
+                                        <span class="error-msg" th:errors="*{name}"></span>
                                     </li>
                                 </ul>
                                 <p style="margin-bottom:1em;"></p>
@@ -67,13 +70,34 @@
                         </div>
                         <!-- すでに登録済みのプロジェクト情報を表示させる -->
                         <div class="sub-main2">
-                            <h1 class="sub-title">️すでに登録済みのプロジェクト(メモ：ここに削除機能もつける)</h1>
-                            <div>
-                                <ul>
-                                    <li th:each="project : ${currentProjectList}"
-                                        th:text="|${project.code}：${project.name}|">
-                                    </li>
-                                </ul>
+                            <h1 class="sub-title">️すでに登録済みのPJ</h1>
+                            <div class="sub-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="column-name">
+                                                <div>PJコード</div>
+                                            </th>
+                                            <th class="column-name">
+                                                <div>PJ名</div>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="project : ${currentProjectList}">
+                                            <td class="col-code" th:text="${project.code}"></td>
+                                            <td class="col-name" th:text="${project.name}"></td>
+                                            <td class="col-delete">
+                                                　　<form th:object="${projectForm}"
+                                                    th:action="@{'/project/delete/' + ${project.id}}"
+                                                    method="post">
+                                                    <input class="submit" type="submit" value="削除">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

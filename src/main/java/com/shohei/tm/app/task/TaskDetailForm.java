@@ -42,7 +42,14 @@ public class TaskDetailForm {
 
 	@Column(length=1000, nullable=true)
     private String plan; //今後の予定 same as above
+	
+	private String year;
 
+	private String month;
+
+	private String day;
+
+	
 	// Setter Getter
 	
 	public void setId(Integer id) {
@@ -64,6 +71,27 @@ public class TaskDetailForm {
 		}
 	public String getProgressRate() {
 		return this.progressRate;
+		}
+
+	public void setYear(String year) {
+		this.year = year;
+		}
+	public String getYear() {
+		return this.year;
+		}
+	
+	public void setMonth(String month) {
+		this.month = month;
+		}
+	public String getMonth() {
+		return this.month;
+		}
+
+	public void setDay(String day) {
+		this.day = day;
+		}
+	public String getDay() {
+		return this.day;
 		}
 	
 	public void setContent(String content) {

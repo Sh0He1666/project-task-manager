@@ -4,6 +4,7 @@
  */
 package com.shohei.tm.domain.service.task;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,13 +44,18 @@ public class TaskService {
 	}
 	
 	//idのcontent, problem, planを更新する
-	public Integer updateTaskDetailById(String status, String progressRate, String content, String problem, String plan, Integer id) {
-		return taskHistoryRepository.updateTaskDetailById(status, progressRate, content, problem, plan, id);
+	public Integer updateTaskDetailById(String status, String progressRate, LocalDate deadlineDate, String content, String problem, String plan, Integer id) {
+		return taskHistoryRepository.updateTaskDetailById(status, progressRate, deadlineDate, content, problem, plan, id);
 	}
 	
-	//プロジェクト情報を追加するメソッド
+	//タスク情報を追加するメソッド
 	public void save(TaskHistory taskHistory) {
 		taskHistoryRepository.save(taskHistory);
+	}
+	
+	//受け取ったIDのタスク情報を削除する
+	public void deleteTaskInfoById(Integer id) {
+		taskHistoryRepository.deleteById(id);			
 	}
 
 }

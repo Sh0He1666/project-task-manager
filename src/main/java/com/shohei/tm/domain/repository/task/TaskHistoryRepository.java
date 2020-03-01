@@ -4,6 +4,7 @@
  */
 package com.shohei.tm.domain.repository.task;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -54,6 +55,7 @@ public interface TaskHistoryRepository extends JpaRepository<TaskHistory, Intege
 	@Query("update TaskHistory th set"
 			+ " th.status =:status,"
 			+ " th.progressRate =:progressRate,"
+			+ " th.deadlineDate =:deadlineDate,"
 			+ " th.content =:content,"
 			+ " th.problem =:problem,"
 			+ " th.plan =:plan"
@@ -61,11 +63,11 @@ public interface TaskHistoryRepository extends JpaRepository<TaskHistory, Intege
 	public Integer updateTaskDetailById (
 			@Param("status") String status,
 			@Param("progressRate") String progressRate,
+			@Param("deadlineDate") LocalDate deadlineDate,
 			@Param("content") String content,
 			@Param("problem") String problem,
 			@Param("plan") String plan,
 			@Param("id") Integer id
 			);
 	
-	//タスク情報を追加する
 }

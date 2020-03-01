@@ -72,6 +72,21 @@ public class ChargeController {
 		
 		return "redirect:/charge";
 	}
+	/**
+	 * チャージコード情報を削除する
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(path="/delete/{id}", method=RequestMethod.POST)
+	String deleteChargeInfoById(
+			@PathVariable("id") Integer id,
+			Model model) {
+		
+		//データを削除
+		chargeService.deleteChargeInfoById(id);
+		return gotoChargeAddInfo(model);
+	}
 	
 	@ModelAttribute
 	ChargeForm setUpChargeForm() {

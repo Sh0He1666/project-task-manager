@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 
 
 /**
- * チャージコードエンティティを表すクラスです
+ * チャージコードエンティティを表すクラスでsu
  * @author shoheitokumaru
  *
  */

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TS OPTIMIZER</title>
+    <link th:href="@{/css/normalize.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/style_task_edit.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/error_msg.css}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header class="top-image-area" th:include="/common.html::body-header">
+    </header>
+    <main>
+        <div class="titlebar-container">
+            <div class="titlebar">
+                <h1 class="title">タスク詳細編集</h1>
+            </div>
+        </div>
+        <div>
+            <!-- main field -->
+            <div class="main-area">
+                <!-- 機能説明 -->
+                <article>
+                    <h1>Description</h1>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo, aut perferendis delectus explicabo
+                        nisi perspiciatis
+                        temporibus. Assumenda at alias ut illo modi, velit, iure magnam, earum eveniet placeat rem
+                        veritatis.</p>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo, aut perferendis delectus explicabo
+                        nisi perspiciatis
+                        temporibus. Assumenda at alias ut illo modi, velit, iure magnam, earum eveniet placeat rem
+                        veritatis.</p>
+                </article>
+
+                <!-- ここから機能部分 基本的にはここだけ修正する。その他は共通 -->
+                <div>
+                  <p th:text="|test : ${year}|"></p>
+                </div>
+            </div>
+            <!-- left side menu -->
+            <div class="left-navi" th:include="/common.html::left-navi">
+            </div>
+        </div>
+    </main>
+
+    <div class="footer" th:include="/common.html::footer">
+    </div>
+
+</body>
+
+</html>
