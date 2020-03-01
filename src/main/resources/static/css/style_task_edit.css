@@ -14,11 +14,11 @@
 }
 
 .sub-main1 form div {
-	margin: 5px 0 5px 0;
+	margin: 10px 0 10px 0;
 }
 
 .sub-main1 span, p{
-	margin: 0 0 0 2rem;
+	margin: 0 5px 0 5px;
 	padding: 0 0 0 0;
 	font-size: 1.5rem;
 }
