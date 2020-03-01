@@ -90,7 +90,7 @@ body main
 	border-left:2px solid #dce3e5;
     margin: 0 6rem 2rem 1.5rem;
     padding: 0 0 0 5rem;
-    width: 75%;
+    width: 1050px;
     height: auto;
     float: right;
     margin-top: 0;
@@ -98,7 +98,7 @@ body main
 
 .main-area article {
     margin: 1rem 0 3rem 0;
-    padding: 0 0 3rem 1rem;
+    padding: 0 0 1rem 1rem;
     background-color: rgba(212, 209, 209, 0.349);
     z-index: 10;
     border : dashed 3px #6b6969;
@@ -106,7 +106,7 @@ body main
 }
 
 .main-area article h1{
-    margin: 0;
+    margin: 0 0 1rem 0;
     padding: 3px 0 3px 0;   
     width: 99%; 
     text-align: left;
@@ -115,10 +115,14 @@ body main
 }
 
 .main-area article p {
-    margin: 0;
-    padding: 1rem 0 1rem 0;    
+    margin: 3px 0;
+    padding: 0 0 0 0;    
     text-align: left;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+}
+
+.main-area article p::before {
+    content: '・';
 }
 
 .main-area article h1::before{
@@ -128,8 +132,8 @@ body main
 .left-navi {
     margin: 1em 0 0 0.5rem;
     padding: 0;
-    width: 12%;
-    position: fixed;
+    max-widht: 170px; 
+    position: static;
 }
 
 .left-navi label {
@@ -137,7 +141,7 @@ body main
     margin: 0 0 3px 0;
     padding: 5px 0 18px 3px;
     height: 10px;
-    width: auto;
+    width: 170px;
     /*border : dashed 2px #aca9a9;*/
     border-radius: 6px;
     color: #6b6969;
@@ -182,7 +186,7 @@ body main
 .left-navi .hidden-list p {
     margin: 15px 10px;
     padding: 3px 3px 3px 3px;
-    width: 80%;
+    width: 170px;
     border-bottom: solid 1px #6b696991;
 }
 
