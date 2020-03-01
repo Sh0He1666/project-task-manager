@@ -48,21 +48,49 @@
                                     <span th:each="code : ${codeList}"
                                         th:if="${code.genre == 'status' && data.status == code.name}"
                                         th:text="|ステータス：「 ${data.status} 」 から |">ステータス：</span>
-                                    <select class="select-box minimal" th:field="*{status}">
+                                    <select class="select-box minimal" name="status">
                                         <option th:each="code : ${codeList}" th:if="${code.genre == 'status'}"
-                                            th:value="${code.name}">[[${code.name}]]
+                                            th:value="${code.name}"
+                                            th:text="${code.name}"
+                                            th:selected="${code.name}==${data.status}">
                                         </option>
-                                    </select><span>へと変更</span>
+                                    </select><span>に変更</span>
                                 </div>
                                 <div>
                                     <span th:each="code : ${codeList}"
                                         th:if="${code.genre == 'progress_rt' && data.progressRate == code.name}"
                                         th:text="|進捗率(%)：「 ${data.progressRate} 」 から |">進捗率(%)：</span>
-                                    <select class="select-box minimal" th:field="*{progressRate}">
+                                    <select class="select-box minimal" name="progressRate">
                                         <option th:each="code : ${codeList}" th:if="${code.genre == 'progress_rt'}"
-                                            th:value="${code.name}">[[${code.name}]]
+                                            th:value="${code.name}"
+                                            th:text="${code.name}"
+                                            th:selected="${code.name}==${data.progressRate}">
                                         </option>
-                                    </select><span> へと変更</span>
+                                    </select><span> に変更</span>
+                                </div>
+                                <div>
+                                    <span th:text="|期日：「 ${data.deadlineDate} 」 から |">期日：</span>
+                                        <select class="select-box minimal" name="year">
+                                            <option th:each="code : ${codeList}" th:if="${code.genre == 'year'}"
+                                                th:value="${code.code}"
+                                                th:text="${code.name}"
+                                                th:selected="${code.code}==${year}">
+                                            </option>
+                                        </select><span class="date">年</span>
+                                        <select class="select-box minimal" name="month">
+                                            <option th:each="code : ${codeList}" th:if="${code.genre == 'month'}"
+                                                th:value="${code.code}"
+                                                th:text="${code.name}"
+                                                th:selected="${code.code}==${month}">
+                                            </option>
+                                        </select><span class="date">月</span>
+                                        <select class="select-box minimal" name="day">
+                                            <option th:each="code : ${codeList}" th:if="${code.genre == 'day'}"
+                                                th:value="${code.code}"
+                                                th:text="${code.name}"
+                                                th:selected="${code.code}==${day}">
+                                            </option>
+                                        </select><span class="date">日  に変更</span>
                                 </div>
                                 <div>
                                     <p>内容：</p>

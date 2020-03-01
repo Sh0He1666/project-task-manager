@@ -9,6 +9,7 @@
     <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/style_task_add_info.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/error_msg.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/sub_table.css}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -70,19 +71,25 @@
                                     <span class="error-msg" th:errors="*{detail}"></span>
                                 </li>
                                 <li>期日
-                                    <p><select class="select-box minimal" th:field="*{year}">
+                                    <p><select class="select-box minimal" name="year">
                                             <option th:each="code : ${codeList}" th:if="${code.genre == 'year'}"
-                                                th:value="${code.code}">[[${code.name}]]
+                                                th:value="${code.code}"
+                                                th:text="${code.name}"
+                                                th:selected="${code.code}==${year}">
                                             </option>
                                         </select><span class="date"> 年 </span>
-                                        <select class="select-box minimal" th:field="*{month}">
+                                        <select class="select-box minimal" name="month">
                                             <option th:each="code : ${codeList}" th:if="${code.genre == 'month'}"
-                                                th:value="${code.code}">[[${code.name}]]
+                                                th:value="${code.code}"
+                                                th:text="${code.name}"
+                                                th:selected="${code.code}==${month}">[[${code.name}]]
                                             </option>
                                         </select><span class="date"> 月 </span>
-                                        <select class="select-box minimal" th:field="*{day}">
+                                        <select class="select-box minimal" name="day">
                                             <option th:each="code : ${codeList}" th:if="${code.genre == 'day'}"
-                                                th:value="${code.code}">[[${code.name}]]
+                                                th:value="${code.code}"
+                                                th:text="${code.name}"
+                                                th:selected="${code.code}==${day}">[[${code.name}]]
                                             </option>
                                         </select><span class="date"> 日 </span></p>
                                 </li>
@@ -110,7 +117,7 @@
                     <!-- すでに登録済みのプロジェクト情報を表示させる -->
                     <div class="sub-main2">
                         <h1 class="sub-title">️すでに登録済みのタスク一覧</h1>
-                        <div>
+                        <div class="sub-table">	
                             <table>
                                 <thead>
                                     <tr>
@@ -125,12 +132,12 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="task : ${currentTaskList}">
-                                        <td class="col" th:text="${task.code}"></td>
-                                        <td class="col" th:text="${task.detail}"></td>
+                                        <td class="col-code" th:text="${task.code}"></td>
+                                        <td class="col-name" th:text="${task.detail}"></td>
                                         <td class="col-delete">
                                             　　<form th:object="${taskForm}"
                                                 th:action="@{'/task/task-add-info/delete/' + ${task.id}}" method="post">
-                                                <input type="submit" value="削除">
+                                                <input class="submit" type="submit" value="削除">
                                             </form>
                                         </td>
                                     </tr>

@@ -1,0 +1,41 @@
+/**
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+}
+**/
+.sub-table {
+	margin: 2rem 0 0 0;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  width: 100%;
+  table-layout: auto;
+}
+
+table th,
+table td {
+  padding: 0;
+  border-bottom: 1px solid #bbb;
+}
+table th {
+  font-size: .85em;
+}
+
+table thead tr{
+  font-weight: bold;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #bbb;
+}
+
+table tbody tr {
+	margin: 0px;
+	padding: 0 0 1rem 0;
+}
+
+.col-code, .col-name, .col-delete {
+	text-align: center;
+}
