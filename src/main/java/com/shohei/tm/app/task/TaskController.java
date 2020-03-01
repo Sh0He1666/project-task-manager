@@ -259,7 +259,7 @@ public class TaskController {
 		Calendar cal = Calendar.getInstance();
 		if (flg.equals("year")) {			
 			String v = String.valueOf(cal.get(Calendar.YEAR));
-			if (v.length() == 1) {
+			if (v.length() == 1) {//ありえない!
 				v = "0" + v;
 			}
 			return v;
