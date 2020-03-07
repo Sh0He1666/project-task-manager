@@ -143,8 +143,7 @@ public class TaskController {
 		model.addAttribute("year", getCurrentDate("year"));
 		model.addAttribute("month", getCurrentDate("month"));
 		model.addAttribute("day", getCurrentDate("day"));
-//		model.addAttribute("date_error_flg", false);
-//		model.addAttribute("date_error_msg", "えらーだっちゃ");
+		
 		return "task/task-add-info";
 	}
 
