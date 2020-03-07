@@ -97,12 +97,12 @@ body main
 }
 
 .main-area article {
-    margin: 1rem 0 3rem 0;
+    margin: 1rem 0 2rem 0;
     padding: 0 0 1rem 1rem;
     background-color: rgba(212, 209, 209, 0.349);
     z-index: 10;
-    border : dashed 3px #6b6969;
-    border-radius: 20px;
+    border : solid 2px #777575;
+    border-radius: 5px;
 }
 
 .main-area article h1{
@@ -282,15 +282,13 @@ body main
   color: #494848;
   line-height: 1.2rem;
   padding: 0.5em 3.5em 0.5em 1em;
- 
-  /* reset */
-
   margin: 0;      
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-appearance: none;
   -moz-appearance: none;
+  
 }
 
 .select-box.minimal {
@@ -308,9 +306,14 @@ body main
     1px 1.5em;
   background-repeat: no-repeat;
 }
+  
+/* radio button */
+.btn-radio {
+	padding: 5px 5px;
+	cursor: pointer;
+}
 
 /* text editor */
-
 #textarea{
   border: 2px solid #ddd;
   width: 100%;

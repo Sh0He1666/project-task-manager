@@ -29,8 +29,9 @@
                     <h1>Description</h1>
                     <p>タスク情報を登録します。</p>
                     <p>「既に登録済みのタスク一覧」から登録済みのタスクを確認できます。また、<br>
-                    　不必要なタスク情報の削除も行えます。</p>
-                      </article>
+                        　不必要なタスク情報の削除も行えます。</p>
+                    <p>存在しない年月日を入力した場合は、自動でその月の最終日に設定されます。</p>
+                </article>
 
                 <!-- ここから機能部分 基本的にはここだけ修正する。その他は共通 -->
                 <div>
@@ -68,22 +69,19 @@
                                 <li>期日
                                     <p><select class="select-box minimal" name="year">
                                             <option th:each="code : ${codeList}" th:if="${code.genre == 'year'}"
-                                                th:value="${code.code}"
-                                                th:text="${code.name}"
+                                                th:value="${code.code}" th:text="${code.name}"
                                                 th:selected="${code.code}==${year}">
                                             </option>
                                         </select><span class="date"> 年 </span>
                                         <select class="select-box minimal" name="month">
                                             <option th:each="code : ${codeList}" th:if="${code.genre == 'month'}"
-                                                th:value="${code.code}"
-                                                th:text="${code.name}"
+                                                th:value="${code.code}" th:text="${code.name}"
                                                 th:selected="${code.code}==${month}">[[${code.name}]]
                                             </option>
                                         </select><span class="date"> 月 </span>
                                         <select class="select-box minimal" name="day">
                                             <option th:each="code : ${codeList}" th:if="${code.genre == 'day'}"
-                                                th:value="${code.code}"
-                                                th:text="${code.name}"
+                                                th:value="${code.code}" th:text="${code.name}"
                                                 th:selected="${code.code}==${day}">[[${code.name}]]
                                             </option>
                                         </select><span class="date"> 日 </span></p>
@@ -112,7 +110,7 @@
                     <!-- すでに登録済みのプロジェクト情報を表示させる -->
                     <div class="sub-main2">
                         <h1 class="sub-title">️すでに登録済みのタスク一覧</h1>
-                        <div class="sub-table">	
+                        <div class="sub-table">
                             <table>
                                 <thead>
                                     <tr>
@@ -130,9 +128,9 @@
                                         <td class="col-code" th:text="${task.code}"></td>
                                         <td class="col-name" th:text="${task.detail}"></td>
                                         <td class="col-delete">
-                                            　　<form th:object="${taskForm}"
+                                            　　<form name="delform" th:object="${taskForm}"
                                                 th:action="@{'/task/task-add-info/delete/' + ${task.id}}" method="post">
-                                                <input class="submit" type="submit" value="削除">
+                                                <input id="alert_delete" class="submit" type="submit" value="削除">
                                             </form>
                                         </td>
                                     </tr>
