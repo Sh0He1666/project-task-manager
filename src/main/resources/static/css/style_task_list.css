@@ -55,6 +55,12 @@ table thead tr{
 	font-weight: bold;
 }
 
+.task-name a[href]:hover {
+	color: #ffc441;
+	font-weight: bold;
+	transition: 0.2s;
+}
+
 @media screen and (max-width: 600px) {
   table {
     border: 0;
@@ -101,4 +107,14 @@ table thead tr{
   table td:last-child {
     border-bottom: 0;
   }
+}
+
+/* テーブル表示出し分け */
+.select-display {
+	margin-left:0 2rem 1rem 0;
+	text-align: right;
+}
+
+.select-display input {
+	margin: 0 0 0 6px;
 }

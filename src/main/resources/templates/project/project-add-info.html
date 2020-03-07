@@ -85,7 +85,7 @@
                                             <td class="col-delete">
                                                 　　<form th:object="${projectForm}"
                                                     th:action="@{'/project/delete/' + ${project.id}}"
-                                                    method="post">
+                                                    method="post" style="display:none">
                                                     <input class="submit" type="submit" value="削除">
                                                 </form>
                                             </td>

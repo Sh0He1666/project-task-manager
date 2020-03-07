@@ -4,7 +4,10 @@
  */
 package com.shohei.tm.app.task;
 
+import java.text.DateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -140,7 +143,8 @@ public class TaskController {
 		model.addAttribute("year", getCurrentDate("year"));
 		model.addAttribute("month", getCurrentDate("month"));
 		model.addAttribute("day", getCurrentDate("day"));
-		
+//		model.addAttribute("date_error_flg", false);
+//		model.addAttribute("date_error_msg", "えらーだっちゃ");
 		return "task/task-add-info";
 	}
 
@@ -178,10 +182,22 @@ public class TaskController {
 			BindingResult bindingResult,
 			Model model) {
 		
+		//年月日を取得
+		String year = form.getYear();
+		String month = form.getMonth();
+		String day = form.getDay();
+		
+		//年月日を解析
+//		if(!checkDate(year, month, day)) {
+//			model.addAttribute("date_error_flg", true);
+//			model.addAttribute("date_error_msg", "えらーだっちゃ");
+//		} 
+		
+		//その他入力値チェック
 		if (bindingResult.hasErrors()) {
 			return gotoTaskAddInfo(model);
 		}
-		
+
 		//取得する値を定義
 		Project projectId; //プロジェクトコードのPK
 		String projectCodeId;
@@ -204,14 +220,14 @@ public class TaskController {
 		
 		//codeを生成
 		code = projectId.getCode() + "_" + projectCodeId;
-		
-		//deadlineDateを生成
-		deadlineDate = createDeadlineDate(form.getYear(), form.getMonth(), form.getDay());
-		
+
 		//ダミーのUserを定義
 		User user = new User();
 		user.setId(1);
 		
+		//deadlineDateを生成
+		deadlineDate = createDeadlineDate(year, month, day);
+
 		//formの値をTaskHistoryに詰める
 		TaskHistory taskHistory = new TaskHistory();
 		taskHistory.setUser(user);
@@ -282,5 +298,17 @@ public class TaskController {
 	private LocalDate createDeadlineDate(String year, String month, String day) {
 		LocalDateConverter conv = new LocalDateConverter();
 		return conv.convertToLocalDate(year, month, day, "yyyyMMdd");
+	}
+	
+	//入力された年月日が存在するかチェックするメソッド
+	private boolean checkDate(String year, String month, String day) {
+	    try {
+	        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	        String s1 = year + "/" + month + "/" + day;
+	        dtf.format(LocalDate.parse(s1, dtf));
+	        return true;
+	    } catch (DateTimeParseException dtp) {
+	        return false;
+	    }
 	}
 }
