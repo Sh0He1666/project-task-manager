@@ -40,15 +40,15 @@ public class TaskForm {
 	@NotNull
 	@Size(min=1, max=100, message="未記入か、文字数が100を超えています。")
 	private String detail; //タスクの題名 varchar(100)
-
-//	@Column(name="deadline_dt", columnDefinition = "DATE" ,nullable=true)
-//	private LocalDate deadlineDate; //期日 
 	
 	private String year;
 
 	private String month;
 
 	private String day;
+	
+//	@CheckDate(message="年月日が不正です。")
+//	private String deadlineDate;
 
 	@Column(length=2, nullable=false)
 	private String status; // 進捗状況　0:未着手, 1:進行中 ,2:処理済み 
@@ -79,21 +79,6 @@ public class TaskForm {
 	public String getProjectCodeId() {
 		return this.projectCodeId;
 		}
-	/**
-	public void setCode(Integer projectId, String projectCodeId) {
-		this.code = project.getCodeById(projectId) + "_" + projectCodeId;
-		}
-	public String getCode() {
-		return this.code;
-		} **/
-    /**
-	public void setCode() {
-		this.code = project.getCodeById(this.getProjectId().getId()) + "_" + this.getProjectCodeId();
-		}
-	public String getCode() {
-		return this.code;
-		}**/ 
-
 	
 	public void setChargeId(ChargeCode chargeId) {
 		this.chargeId = chargeId;
@@ -108,14 +93,6 @@ public class TaskForm {
 	public String getDetail() {
 		return this.detail;
 		}
-	/**
-	public void setDeadlineDate() {
-		LocalDateConverter conv = new LocalDateConverter();
-		this.deadlineDate = conv.convertToLocalDate(this.getYear(), this.getMonth(), this.getDay(), this.FORMAT);
-		}
-	public LocalDate getDeadlineDate() {
-		return this.deadlineDate;
-		}**/
 	
 	public void setYear(String year) {
 		this.year = year;
@@ -151,4 +128,11 @@ public class TaskForm {
 	public String getProgressRate() {
 		return this.progressRate;
 		}
+	
+//	public void setDeadLineDate(String year, String month, String day) {
+//		this.deadlineDate = year + "/" + month + "/" + day;
+//	}
+//	public String getDeadLineDate() {
+//		return this.deadlineDate;
+//	}
 }

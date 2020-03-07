@@ -29,7 +29,8 @@ public interface TaskHistoryRepository extends JpaRepository<TaskHistory, Intege
 	 * 
 	 */ 
 	
-	@Query(value = "select x from TaskHistory x order by id, projectId asc")
+//	@Query(value = "select x from TaskHistory x order by id, projectId asc")
+	@Query(value = "select x from TaskHistory x order by deadlineDate asc")
 	List<TaskHistory> queryAll();
 	//List<TaskHistory> findByUser_id(User user);
 	
