@@ -4,7 +4,7 @@ import javax.validation.*;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy={ CheckDateValidator.class })
+//@Constraint(validatedBy={ CheckDateValidator.class })
 @Target({ ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CheckDate {
