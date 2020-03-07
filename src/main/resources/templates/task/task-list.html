@@ -33,10 +33,10 @@
                 <!-- ここから機能部分 基本的にはここだけ修正する。その他は共通 -->
                 <!-- 画面だ仕分けテスト -->
                 <div class="select-display">
-                    <input class="btn-radio" type="radio" name="dispOption" value="全て表示" onclick="showAll()" checked> 全て表示
-                    <input class="btn-radio" type="radio" name="dispOption" value="未着手" onclick="showNoTouch()"> 未着手
-                    <input class="btn-radio" type="radio" name="dispOption" value="進行中" onclick="showProceeding()"> 進行中
-                    <input class="btn-radio" type="radio" name="dispOption" value="完了" onclick="showCompleted()"> 処理済み
+                    <input class="btn-radio" id="showAll" type="radio" name="dispOption" value="全て表示" checked> 全て表示
+                    <input class="btn-radio" id="showNoTouch" type="radio" name="dispOption" value="未着手"> 未着手
+                    <input class="btn-radio" id="showProceeding" type="radio" name="dispOption" value="進行中"> 進行中
+                    <input class="btn-radio" id="showCompleted" type="radio" name="dispOption" value="完了"> 処理済み
                 </div>
                 <div>
                     <div th:each="project : ${project_lists}">
@@ -64,6 +64,9 @@
                                     <td data-label="進捗状況" class="status" th:text="${task.status}"></td>
                                     <td data-label="進捗度(%)" class="status-rt" th:text="${task.progressRate}"></td>
                                     <td data-label="進行中タスク" class="proceeding">
+                                        <form name="regWkTime" method="post">
+                                            <input class="btn-submit" id="regWkTime" type="submit" name="regWkTime"> 
+                                        </form>
                                     </td>
                                 </tr>
                             </tbody>
@@ -71,50 +74,6 @@
                     </div>
                 </div>
             </div>
-            <script>
-                //tdのある要素がある値を含む時にそのtrを非表示(display=none)にする
-
-                function showNoTouch() {
-                    showRows("未着手");
-                }
-                function showProceeding() {
-                	showRows("進行中");
-                }
-                function showCompleted() {
-                	showRows("処理済み");
-                }
-                function showAll() {
-                	showRows("showAll");
-                }
-
-                function showRows(target) {
-                    //ターゲットを取得
-                    var tgt = target;
-                    //変数を決める
-                    var tables = document.getElementsByClassName("tbl");
-                    var tableCnt = tables.length;
-                    var FLG = document.getElementByName
-                    var ttr = "";
-                    var ttd = "";
-                    //デバッグ
-                    console.log("tables");
-
-                    //テーブル数の数だけ処理を繰り返す
-                    for (i = 0; i < tableCnt; i++) {
-                        var table = tables[i];
-                        var rowCnt = table.rows.length;
-                        for (j = 0; j < rowCnt; j++) {
-                            ttr = table.rows[j];
-                            ttd = ttr.cells[4];
-                            if (tgt === "showAll" || !(ttd.textContent != tgt && ttd.textContent != "進捗状況")) {
-                                ttr.style.display = "";
-                            } else {
-                                ttr.style.display = "none";
-                            }
-                        }
-                    }
-                }
-            </script>
             <!-- left side menu -->
             <div class="left-navi" th:include="/common.html::left-navi">
             </div>
@@ -122,6 +81,8 @@
     </main>
     <div class="footer" th:include="/common.html::footer">
     </div>
+    <script src="../js/alert_delete.js"></script>
+    <script src="../js/task_list.js"></script>
 </body>
 
 </html>

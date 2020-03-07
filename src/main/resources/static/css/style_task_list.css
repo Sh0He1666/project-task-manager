@@ -20,7 +20,7 @@ table {
 }
 
 .project-name::before {
-    content: '・';
+    content: '# ';
     font-weight: bold;
 }
 

@@ -107,10 +107,11 @@
                             </p>
                         </form>
                     </div>
-                    <!-- すでに登録済みのプロジェクト情報を表示させる -->
+                    <!-- すでに登録済みのプロジェクト情報を表示する -->
                     <div class="sub-main2">
                         <h1 class="sub-title">️すでに登録済みのタスク一覧</h1>
-                        <div class="sub-table">
+                        <div class="sub-table" th:each="project : ${currentProjectList}">
+                            <p class="project-name" th:text="${project.name}">プロジェクト名</p>
                             <table>
                                 <thead>
                                     <tr>
@@ -120,13 +121,17 @@
                                         <th class="column-name">
                                             <div>タスク名</div>
                                         </th>
+                                        <th class="column-name">
+                                            <div>完了期日</div>
+                                        </th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="task : ${currentTaskList}">
+                                    <tr th:each="task : ${currentTaskList}" th:if="${project.id == task.projectId.id}">
                                         <td class="col-code" th:text="${task.code}"></td>
                                         <td class="col-name" th:text="${task.detail}"></td>
+                                        <td class="col-name" th:text="${task.deadlineDate}"></td>
                                         <td class="col-delete">
                                             　　<form name="delform" th:object="${taskForm}"
                                                 th:action="@{'/task/task-add-info/delete/' + ${task.id}}" method="post">
