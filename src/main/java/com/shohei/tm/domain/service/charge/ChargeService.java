@@ -41,11 +41,13 @@ public class ChargeService {
 	}
 	
 	//update
+	@Transactional
 	public void save(ChargeCode charge) {
 		chargeCodeRepository.save(charge);
 	}
 	
 	//delete
+	@Transactional
 	public void deleteChargeInfoById(Integer id) {
 		chargeCodeRepository.deleteById(id);
 	}

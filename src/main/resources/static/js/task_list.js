@@ -4,6 +4,7 @@ var showAll = document.getElementById('showAll');
 var showNoTouch = document.getElementById('showNoTouch');
 var showProceeding = document.getElementById('showProceeding');
 var showCompleted = document.getElementById('showCompleted');
+//var createTablelistChecker = document.getElementById('createTablelistChecker');
 
 //イベントリスナーを仕掛ける
 showAll.addEventListener('click', function () {
@@ -18,8 +19,11 @@ showProceeding.addEventListener('click', function () {
 showCompleted.addEventListener('click', function () {
     showRows("処理済み");
 })
+//createTablelistChecker.addEventListener('DOMContentLoaded', function () {
+//	checker();
+//})
 
-//ロジック
+//ステータスによって表示を切り替える
 function showRows(target) {
     //ターゲットを取得
     var tgt = target;
@@ -47,3 +51,33 @@ function showRows(target) {
         }
     }
 }
+
+//テーブルカラムがある場合はタスク一覧作成ボタン非表示
+window.onload = function () {
+	    //テーブルを取得
+	    var tables = document.getElementsByClassName("tbl");
+	    //テーブル数
+	    var tableCnt = tables.length;
+	    //カウンタ
+	    var counter=0;
+
+	    //テーブル数の数だけ処理を繰り返す
+	    for (i = 0; i < tableCnt; i++) {
+	        var table = tables[i];
+	        var rowCnt = table.rows.length;
+	        counter += rowCnt;
+	    }
+	    
+	    if (counter != tableCnt) {
+	    	createTablelistChecker.style.display = "none";
+	    }
+}
+
+
+
+
+
+
+
+
+

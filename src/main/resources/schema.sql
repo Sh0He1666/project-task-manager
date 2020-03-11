@@ -62,6 +62,8 @@ CREATE TABLE task_history
 	status varchar(10) NOT NULL,
 	progress_rt varchar(10) NOT NULL,
 	registered_dt timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	-- 2020/03/08 追加
+	c_date date,
 	PRIMARY KEY (id)
 ) WITHOUT OIDS /;
 

@@ -31,7 +31,18 @@
                 </article>
 
                 <!-- ここから機能部分 基本的にはここだけ修正する。その他は共通 -->
-                <!-- 画面だ仕分けテスト -->
+                <!-- 日付ページに遷移 -->
+                <div class="date">
+                  <a th:href="@{/task(pre_date=${pre_date})}" th:text="${pre_date}"></a>
+                  <a th:href="@{/task(next_date=${next_date})}" th:text="${next_date}"></a>
+                </div>
+                <div>
+                  <form class="create_tasklist" name="create_tasklist"
+                  th:action="@{'/task/create-tasklist'}" method="get">
+                    <input class="submit" id="createTablelistChecker" type="submit" value="本日のタスク一覧を作成">
+                  </form>
+                </div>
+                <!-- 画面だ仕分け -->
                 <div class="select-display">
                     <input class="btn-radio" id="showAll" type="radio" name="dispOption" value="全て表示" checked> 全て表示
                     <input class="btn-radio" id="showNoTouch" type="radio" name="dispOption" value="未着手"> 未着手
@@ -65,7 +76,7 @@
                                     <td data-label="進捗度(%)" class="status-rt" th:text="${task.progressRate}"></td>
                                     <td data-label="進行中タスク" class="proceeding">
                                         <form name="regWkTime" method="post">
-                                            <input class="btn-submit" id="regWkTime" type="submit" name="regWkTime"> 
+                                            <input class="btn-submit" id="regWkTime" type="checkbox" name="regWkTime"> 
                                         </form>
                                     </td>
                                 </tr>

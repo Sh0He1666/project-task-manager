@@ -118,3 +118,44 @@ table thead tr{
 .select-display input {
 	margin: 0 0 0 6px;
 }
+
+/* 日付の表示 */
+.date {
+	margin: 1rem 0;
+}
+
+.date a:nth-of-type(1) {
+	margin:0 0 0 0;
+}
+
+.date a:nth-of-type(2) {
+	margin:0 0 0 0;
+	float:right;
+}
+
+.date a:nth-of-type(1)::before {
+	content: '<-';
+}
+.date a:nth-of-type(2)::after {
+	content: '->';
+}
+
+.date a[href] {
+	color: #0000ffbb;
+	font-weight: bold;
+	font-size: 1rem;
+}
+.date a[href]:hover {
+	color: #ffc441;
+	font-weight: bold;
+	transition: 0.2s;
+}
+
+.create_tasklist {
+	margin: 1rem 0;
+}
+.create_tasklist submit {
+	float: right;
+}
+
+

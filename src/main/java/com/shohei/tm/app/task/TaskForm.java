@@ -5,6 +5,7 @@
 package com.shohei.tm.app.task;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
@@ -36,6 +37,10 @@ public class TaskForm {
 
 	@NotNull
 	private ChargeCode chargeId; //チャージコードのPK
+	
+	//タスク追加の時はNULLでもOK
+	private LocalDate pre_date;
+	private LocalDate next_date;
 	
 	@NotNull
 	@Size(min=1, max=100, message="未記入か、文字数が100を超えています。")
@@ -128,6 +133,20 @@ public class TaskForm {
 	public String getProgressRate() {
 		return this.progressRate;
 		}
+	
+	public void setPreDate(LocalDate pre_date) {
+		this.pre_date = pre_date;
+		}
+	public LocalDate getPreDate() {
+		return this.pre_date;
+		}	
+	
+	public void setNextDate(LocalDate next_date) {
+		this.next_date = next_date;
+		}
+	public LocalDate getNextDate() {
+		return this.next_date;
+		}	
 	
 //	public void setDeadLineDate(String year, String month, String day) {
 //		this.deadlineDate = year + "/" + month + "/" + day;
