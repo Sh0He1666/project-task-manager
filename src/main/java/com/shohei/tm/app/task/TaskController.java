@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shohei.tm.app.converter.LocalDateConverter;
 import com.shohei.tm.domain.model.ChargeCode;
@@ -50,16 +52,13 @@ public class TaskController {
 	ChargeService chargeService;
 	@Autowired
 	CodeService codeService;
-	
-	//変数を指定
-	//結果を格納する
-	String result;
 
 	//タスク一覧とチャージコードリストを返すビジネスロジック
 	@RequestMapping(method=RequestMethod.GET)
-	String listTasks(Model model) {
-		//taskListsにテーブル内のタスクを取得
-		List<TaskHistory> taskLists = taskService.findAllTaskLists();
+	String gotoTaskList(Model model) {
+		//taskListsにテーブル内のタスクを取得 ※ここも日付指定してリスト取得に帰る
+		//List<TaskHistory> taskLists = taskService.findAllTaskLists();
+		List<TaskHistory> taskLists = taskService.getTaskListByDate(createDateByCalcDays(0, "yyyyMMdd"));
 		//プロジェクトIDリストを取得
 		List<Project> projectLists = projectService.findAll();
 		//コードマスタ
@@ -69,8 +68,90 @@ public class TaskController {
 		model.addAttribute("task_lists", taskLists);
 		model.addAttribute("project_lists", projectLists);
 		model.addAttribute("codeList", codeList);
+		//前日の日付取得
+		model.addAttribute("pre_date", createDateByCalcDays(-1, "yyyyMMdd"));
+		model.addAttribute("next_date", createDateByCalcDays(1, "yyyyMMdd"));
+		//翌日の日付取得
 		return "task/task-list";
 	}
+	
+	//日付切り替え時の処理(前の日)
+	//@RequestMapping(path="goback/{pre_date}", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET, params = {"pre_date"})
+	String gotoTaskListByPreDate(
+			//@PathVariable("pre_date") 
+			@RequestParam(name="pre_date", required=true)String pre_date,
+			Model model) {
+		LocalDate date = convertToLocalDateFromStr(pre_date, "yyyyMMdd");
+		
+		//taskListsにテーブル内のタスクを取得
+		List<TaskHistory> taskLists = taskService.getTaskListByDate(date);
+		//プロジェクトIDリストを取得
+		List<Project> projectLists = projectService.findAll();
+		//コードマスタ
+		List<Code> codeList = codeService.findAll();
+		
+		//取得した値をmodelに追加する
+		model.addAttribute("task_lists", taskLists);
+		model.addAttribute("project_lists", projectLists);
+		model.addAttribute("codeList", codeList);
+		//日付取得
+		model.addAttribute("pre_date", convertToLocalDateByCalcDays(date, -1, "yyyyMMdd"));
+		model.addAttribute("next_date", convertToLocalDateByCalcDays(date, 1, "yyyyMMdd"));
+		return "task/task-list";
+	}
+	
+	//日付切り替え時の処理(前の日)
+	//@RequestMapping(path="goforward/{next_date}", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET, params={"next_date"})
+	String gotoTaskListByNextDate(
+			//@PathVariable("next_date") 
+			@RequestParam(name="next_date", required=true) String next_date,
+			Model model) {
+
+		LocalDate date = convertToLocalDateFromStr(next_date, "yyyyMMdd");
+
+		//taskListsにテーブル内のタスクを取得
+		List<TaskHistory> taskLists = taskService.getTaskListByDate(date);
+		//プロジェクトIDリストを取得
+		List<Project> projectLists = projectService.findAll();
+		//コードマスタ
+		List<Code> codeList = codeService.findAll();
+		
+		//取得した値をmodelに追加する
+		model.addAttribute("task_lists", taskLists);
+		model.addAttribute("project_lists", projectLists);
+		model.addAttribute("codeList", codeList);
+		//日付取得
+		model.addAttribute("pre_date", convertToLocalDateByCalcDays(date, -1, "yyyyMMdd"));
+		model.addAttribute("next_date", convertToLocalDateByCalcDays(date, 1, "yyyyMMdd"));
+		return "task/task-list";
+	}
+	
+	
+	//当日分のタスク一覧を作成する
+	@RequestMapping(path="create-tasklist", method=RequestMethod.GET)
+	String createTaskListByNowDate(Model model) {
+		//タスク一覧の雛形を作成
+		taskService.createTaskEditBase();
+		LocalDate currentDate = createDateByCalcDays(0, "yyyyMMdd");
+		//taskListsにテーブル内のタスクを取得
+		List<TaskHistory> taskLists = taskService.getTaskListByDate(currentDate);
+		//プロジェクトIDリストを取得
+		List<Project> projectLists = projectService.findAll();
+		//コードマスタ
+		List<Code> codeList = codeService.findAll();
+		
+		//取得した値をmodelに追加する
+		model.addAttribute("task_lists", taskLists);
+		model.addAttribute("project_lists", projectLists);
+		model.addAttribute("codeList", codeList);
+		//日付取得
+		model.addAttribute("pre_date", convertToLocalDateByCalcDays(currentDate, -1, "yyyyMMdd"));
+		model.addAttribute("next_date", convertToLocalDateByCalcDays(currentDate, 1, "yyyyMMdd"));
+		return "task/task-list";	
+		}
+	
 
 	/**
 	 * タスク一覧画面→タスク詳細クリック→タスク詳細を編集する画面へ遷移
@@ -117,7 +198,7 @@ public class TaskController {
 		String content = form.getContent();
 		String problem = form.getProblem();
 		String plan = form.getPlan();
-		LocalDate deadlineDate = createDeadlineDate(form.getYear(), form.getMonth(), form.getDay());
+		LocalDate deadlineDate = createDateFromString(form.getYear(), form.getMonth(), form.getDay());
 
 				
 		//データを更新
@@ -132,7 +213,7 @@ public class TaskController {
 		//カレントのステータスを取得
 		List<Project> currentProjectList = projectService.findAll();
 		List<ChargeCode> currentChargeList = chargeService.findAll();
-		List<TaskHistory> currentTaskList = taskService.findAllTaskLists();
+		List<TaskHistory> currentTaskList = taskService.getTaskListByDate(createDateByCalcDays(0, "yyyyMMdd"));
 		List<Code> codeList = codeService.findAll();
 		
 		//取得した値をmodelに突っ込む
@@ -204,8 +285,9 @@ public class TaskController {
 		String code; //SES_100
 		String detail; //タスク名
 		LocalDate deadlineDate; //期日
+		LocalDate cdate = createDateByCalcDays(0, "yyyyMMdd");
 		String status; //ステータス
-		String progressRate; //進捗度		
+		String progressRate; //進捗度	
 		
 		//formの値を取得
 		projectId = form.getProjectId();
@@ -225,7 +307,7 @@ public class TaskController {
 		user.setId(1);
 		
 		//deadlineDateを生成
-		deadlineDate = createDeadlineDate(year, month, day);
+		deadlineDate = createDateFromString(year, month, day);
 
 		//formの値をTaskHistoryに詰める
 		TaskHistory taskHistory = new TaskHistory();
@@ -237,6 +319,7 @@ public class TaskController {
 		taskHistory.setDeadlineDate(deadlineDate);
 		taskHistory.setStatus(status);	
 		taskHistory.setProgressRate(progressRate);
+		taskHistory.setCdate(cdate);
 		
 		//TaskHistoryに値を追加
 		taskService.save(taskHistory);
@@ -294,7 +377,7 @@ public class TaskController {
 	}
 	
 	//DeadlineDateを生成するメソッド
-	private LocalDate createDeadlineDate(String year, String month, String day) {
+	private LocalDate createDateFromString(String year, String month, String day) {
 		LocalDateConverter conv = new LocalDateConverter();
 		return conv.convertToLocalDate(year, month, day, "yyyyMMdd");
 	}
@@ -310,4 +393,23 @@ public class TaskController {
 	        return false;
 	    }
 	}
+	
+	//現在日時+-日数を計算して年月日を返す
+	private LocalDate createDateByCalcDays(int calcDays, String format) {
+		LocalDateConverter conv = new LocalDateConverter();
+		return conv.convertToLocalDateByCalcDays(calcDays, format);		
+	}
+	
+	//引数に受け取った年月日を基準に年月日を出力する
+	private LocalDate convertToLocalDateByCalcDays(LocalDate date, int calcDays, String format) {
+		LocalDateConverter conv = new LocalDateConverter();
+		return conv.convertToLocalDateByCalcDays(date, calcDays, format);
+	}
+	
+	//文字列の年月日→LocalDateに変換
+	private LocalDate convertToLocalDateFromStr(String str_date, String format){
+		LocalDateConverter conv = new LocalDateConverter();
+		return conv.convertToLocalDateFromStr(str_date, format);
+	}
+	
 }

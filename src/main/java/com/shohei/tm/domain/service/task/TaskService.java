@@ -5,6 +5,7 @@
 package com.shohei.tm.domain.service.task;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,16 @@ public class TaskService {
 	//受け取ったIDのタスク情報を削除する
 	public void deleteTaskInfoById(Integer id) {
 		taskHistoryRepository.deleteById(id);			
+	}
+	
+	//引数の年月日に合致するレコードを取得する
+	public List<TaskHistory> getTaskListByDate(LocalDate cdate) {
+		return taskHistoryRepository.getTaskListByDate(cdate);
+	}
+	
+	//翌日のタスク一覧の雛形を作成する
+	public void createTaskEditBase() {
+		taskHistoryRepository.createTaskEditBase();
 	}
 
 }
