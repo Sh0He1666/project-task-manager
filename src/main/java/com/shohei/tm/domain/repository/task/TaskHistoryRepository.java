@@ -25,32 +25,10 @@ import com.shohei.tm.domain.model.User;
  */
 @Transactional
 public interface TaskHistoryRepository extends JpaRepository<TaskHistory, Integer> {
-	/**
-	 * 実装されるメソッド
-	 * 
-	 */ 
 	
 //	@Query(value = "select x from TaskHistory x order by id, projectId asc")
 	@Query(value = "select x from TaskHistory x order by deadlineDate asc")
 	List<TaskHistory> queryAll();
-	//List<TaskHistory> findByUser_id(User user);
-	
-	/**
-	@Query(value = "select x.id,"
-			+ " x.chargeCode,"
-			+ " x.code,"
-			+ " x.content,"
-			+ " x.deadlineDate,"
-			+ " x.detail,"
-			+ " x.plan,"
-			+ " x.problem,"
-			+ " (select max(c.name) from Code c where c.genre = 'status' and c.code = x.status) as status,"
-			+ " (select max(c.name) from Code c where c.genre = 'progress_rt' and c.code = x.progressRate) as progress_rt"
-			+ " from TaskHistory x"
-			+ " order by x.id, x.projectId asc")
-	List<TaskHistory> queryAll();
-	//List<TaskHistory> findByUser_id(User user);
-	**/
 	
 	//翌日のタスク一覧の雛形を作成する
 	@Modifying
@@ -91,5 +69,9 @@ public interface TaskHistoryRepository extends JpaRepository<TaskHistory, Intege
 			@Param("plan") String plan,
 			@Param("id") Integer id
 			);
+	
+	//最新のcdateを取得する
+//	@Query(value="select max(c_date) as c_date from task_history", nativeQuery=true)
+//	public TaskHistory getLatestCdate();
 	
 }

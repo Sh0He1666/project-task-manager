@@ -142,8 +142,7 @@ table thead tr{
 
 .date a[href] {
 	color: #0000ffbb;
-	font-weight: bold;
-	font-size: 1rem;
+	font-size: 1.5rem;
 }
 .date a[href]:hover {
 	color: #ffc441;
