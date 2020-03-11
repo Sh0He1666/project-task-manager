@@ -132,9 +132,15 @@ public class TaskController {
 	//当日分のタスク一覧を作成する
 	@RequestMapping(path="create-tasklist", method=RequestMethod.GET)
 	String createTaskListByNowDate(Model model) {
-		//タスク一覧の雛形を作成
-		taskService.createTaskEditBase();
+		
 		LocalDate currentDate = createDateByCalcDays(0, "yyyyMMdd");
+		List<TaskHistory> cdate_checker = taskService.getTaskListByDate(currentDate);
+		
+		if (cdate_checker == null || cdate_checker.size() == 0) {
+			//タスク一覧の雛形を作成
+			taskService.createTaskEditBase();
+		}
+		
 		//taskListsにテーブル内のタスクを取得
 		List<TaskHistory> taskLists = taskService.getTaskListByDate(currentDate);
 		//プロジェクトIDリストを取得

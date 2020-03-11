@@ -68,5 +68,10 @@ public class TaskService {
 	public void createTaskEditBase() {
 		taskHistoryRepository.createTaskEditBase();
 	}
+	
+	//最新のcdateを取得する
+//	public TaskHistory getLatestCdate() {
+//		return taskHistoryRepository.getLatestCdate();
+//	}
 
 }
