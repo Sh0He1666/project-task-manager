@@ -7,6 +7,7 @@ package com.shohei.tm.domain.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -52,6 +53,10 @@ public class TaskHistory implements Serializable {
 
 	@Column(name="deadline_dt", columnDefinition = "DATE" ,nullable=true)
 	private LocalDate deadlineDate; //期日 
+	
+	@NotNull
+	@Column(name="c_date",columnDefinition = "DATE" ,nullable=false)
+	private LocalDate cdate;
 	
 	@Column(nullable=false)
 	private String status; // 進捗状況　0:未着手, 1:進行中 ,2:処理済み 
@@ -157,5 +162,12 @@ public class TaskHistory implements Serializable {
 		}
 	public Project getProjectId() {
 		return this.projectId;
+		}
+	
+	public void setCdate(LocalDate cdate) {
+		this.cdate = cdate;
+		}
+	public LocalDate getCdate() {
+		return this.cdate;
 		}
 }
