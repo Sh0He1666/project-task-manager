@@ -63,7 +63,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.2.5.RELEASE</version>
                 <configuration>
-        　　　　　		<mainClass>com.shohei.tm.TmApplication</mainClass>
+             		<mainClass>com.shohei.tm.TmApplication</mainClass>
     			</configuration>
                 <executions>
                     <execution>
@@ -101,6 +101,11 @@
                 </executions>
             </plugin> -->
         </plugins>
+        <resources>
+ 	    	<resource>
+     			<directory>src/main/resources</directory>
+   			</resource>
+  		</resources>        
     </build>
 
 </project>
