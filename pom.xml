@@ -12,9 +12,10 @@
     <artifactId>tm</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>tm</name>
-    <description>first project for Spring Boot</description>
+    <description>Task Manager ver 1.0</description>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><!-- 追記 2020.03.15 -->
         <java.version>1.8</java.version>
     </properties>
 

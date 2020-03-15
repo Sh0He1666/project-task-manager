@@ -17,7 +17,7 @@ import com.shohei.tm.domain.model.Project;
 
 
 /**
- * タスク詳細に関するリクエストを受けるコントローラークラス
+ * タスク詳細に関するリクエストを受けるフォームクラス
  * @author shoheitokumaru
  *
  */

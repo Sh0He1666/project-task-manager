@@ -26,7 +26,6 @@ import com.shohei.tm.domain.model.User;
 @Transactional
 public interface TaskHistoryRepository extends JpaRepository<TaskHistory, Integer> {
 	
-//	@Query(value = "select x from TaskHistory x order by id, projectId asc")
 	@Query(value = "select x from TaskHistory x order by deadlineDate asc")
 	List<TaskHistory> queryAll();
 	
@@ -45,7 +44,7 @@ public interface TaskHistoryRepository extends JpaRepository<TaskHistory, Intege
 	//引数の年月日に合致するレコードを取得する
 	@Modifying
 	@Transactional
-	@Query("select x from TaskHistory x where x.cdate =:cdate")
+	@Query("select x from TaskHistory x where x.cdate =:cdate order by x.deadlineDate asc")
 	public List<TaskHistory> getTaskListByDate(
 			@Param("cdate") LocalDate cdate);
 	

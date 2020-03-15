@@ -13,7 +13,8 @@ CREATE TABLE working_time_log
 	taskUID varchar(300) NOT NULL,
 	-- start: on, stop:off
     ss_flg varchar(5) NOT NULL,
-	registered_dt timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    registered_dt timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    ss_name varchar(10),
 	PRIMARY KEY (id)
 )/;
 
