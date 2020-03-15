@@ -4,6 +4,9 @@
 
 package com.shohei.tm.domain.model;
 
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +27,15 @@ public class WorkingTimeLog {
 	private String taskUID;
 	
 	@NotNull
-	private String ss_flg;
+	@Column(name="ss_flg")
+	private String ssFlg;
+	
+	@NotNull
+	@Column(name="ss_name")
+	private String ssName;
+	
+	@Column(name="registered_dt", columnDefinition = "TIMESTAMP")
+	private LocalDateTime registeredDate;
 	
 	//Setter, Getter
 	public Integer getId() {
@@ -42,9 +53,23 @@ public class WorkingTimeLog {
 	}
 	
 	public String getSsFlg() {
-		return this.ss_flg;
+		return this.ssFlg;
 	}
-	public void setId(String ss_flg) {
-		this.ss_flg = ss_flg;
+	public void setSsFlg(String ssFlg) {
+		this.ssFlg = ssFlg;
+	}
+	
+	public String getSsName() {
+		return this.ssName;
+	}
+	public void setSsName(String ssName) {
+		this.ssName = ssName;
+	}
+	
+	public LocalDateTime getRegisteredDate() {
+		return this.registeredDate;
+	}
+	public void setRegisteredDate(LocalDateTime registeredDate) {
+		this.registeredDate = registeredDate;
 	}
 }

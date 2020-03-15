@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE TS OPTIMIZER</title>
+    <title>TaskManager ver 1.0</title>
     <link th:href="@{/css/normalize.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/style_task_list.css}" rel="stylesheet" type="text/css">
@@ -33,12 +33,12 @@
                 <!-- ここから機能部分 基本的にはここだけ修正する。その他は共通 -->
                 <!-- 日付ページに遷移 -->
                 <div class="date">
-                  <a th:href="@{/task(pre_date=${pre_date})}" th:text="${pre_date}"></a>
-                  <a th:href="@{/task(next_date=${next_date})}" th:text="${next_date}"></a>
+                  <a th:href="@{/task(pre_date=${pre_date}, next_date='')}" th:text="${pre_date}"></a>
+                  <a th:href="@{/task(pre_date='',next_date=${next_date})}" th:text="${next_date}"></a>
                 </div>
                 <div>
                   <form class="create_tasklist" name="create_tasklist"
-                  th:action="@{'/task/create-tasklist'}" method="get">
+                  th:action="@{'/task/create-tasklist'}" method="post">
                     <input class="submit" id="createTablelistChecker" type="submit" value="本日のタスク一覧を作成">
                   </form>
                 </div>
@@ -52,7 +52,7 @@
                 <div>
                     <div th:each="project : ${project_lists}">
                         <table class="tbl">
-                            <p class="project-name" th:text="${project.name}">プロジェクト名</p>
+                            <p id ="projectName" class="project-name" th:text="${project.name}">プロジェクト名</p>
                             <thead>
                                 <tr>
                                     <th scope="col">タスクID</th>
@@ -61,7 +61,8 @@
                                     <th scope="col">完了期日</th>
                                     <th scope="col">進捗状況</th>
                                     <th scope="col">進捗度(%)</th>
-                                    <th scope="col">進行中タスク</th>
+                                    <th scope="col">作業状況</th>
+                                    <th scope="col">経過時間(時分秒)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,10 +75,21 @@
                                     <td data-label="完了期日" class="deadline" th:text="${task.deadlineDate}"></td>
                                     <td data-label="進捗状況" class="status" th:text="${task.status}"></td>
                                     <td data-label="進捗度(%)" class="status-rt" th:text="${task.progressRate}"></td>
-                                    <td data-label="進行中タスク" class="proceeding">
-                                        <form name="regWkTime" method="post">
-                                            <input class="btn-submit" id="regWkTime" type="checkbox" name="regWkTime"> 
+                                    <td data-label="進行中タスク" class="proceeding"
+                                        th:each="wtl : ${workingTimeList}" 
+                                        th:if="${(task.code + task.detail) == wtl.taskUID}">
+                                        <form name="regWkTimeLog" 
+                                        th:action="@{'/task/update-wtl/' + ${wtl.ssFlg}}" method="post">
+                                            <input type="text" name="taskUID" th:value="${wtl.taskUID}" style="display:none"></input>
+                                            <input class="btn-submit" type="submit" th:value="${wtl.ssName}"> 
                                         </form>
+                                    </td>
+                                    <td data-label="経過時間" class="working-time"
+                                        th:each="time : ${sumWorkingTimeAdayList}" 
+                                        th:if="${(task.code + task.detail) == time.taskUID}" 
+                                        >
+                                        <span th:text="${time.sumWkTime != null} ? ${time.sumWkTime} : ''"
+                                        style="display: inline-block; width: 100%; text-align: center;"></span>
                                     </td>
                                 </tr>
                             </tbody>
