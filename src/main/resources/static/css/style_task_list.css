@@ -45,9 +45,14 @@ table thead tr{
    text-align: left;
    padding: 0 0 0 5px;
 }*/
-.task-id, .price, .charge, .task-name, .deadline, .status, .status-rt, .proceeding {
-   text-align: left;
-   padding: 2px 0 2px 5px;
+.task-id, .price, .charge, .deadline, .status, .status-rt, .proceeding, .working-time {
+/*    text-align: left;
+   padding: 2px 0 2px 5px; */
+   text-align: center;
+	vertical-align: top;
+}
+.task-name {
+	padding:0 0 0 0.5rem;
 }
 
 .task-name a[href] {
@@ -157,4 +162,12 @@ table thead tr{
 	float: right;
 }
 
-
+.btn-submit {
+	text-align: center;
+    width: 65px;
+    height: 1.5rem;
+    font: bold;
+    font-size: 1rem;
+    color: rgb(37, 37, 37);
+    cursor:pointer;
+}
