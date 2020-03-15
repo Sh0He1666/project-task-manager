@@ -39,7 +39,7 @@ public class ProjectController {
 	String gotoProjectAddInfo(Model model) {
 		List<Project> currentProjectList = projectService.findAll();
 		model.addAttribute("currentProjectList", currentProjectList);
-		return "/project/project-add-info";
+		return "project/project-add-info";
 	}
 	
 	/**

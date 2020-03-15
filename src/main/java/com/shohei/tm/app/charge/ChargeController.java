@@ -39,7 +39,7 @@ public class ChargeController {
 	String gotoChargeAddInfo(Model model) {
 		List<ChargeCode> currentChargeList = chargeService.findAll();
 		model.addAttribute("currentChargeList", currentChargeList);
-		return "/charge/charge-add-info";
+		return "charge/charge-add-info";
 	}
 	
 	/**
